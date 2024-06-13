@@ -24,7 +24,8 @@ class TestController extends Controller
         return response()->json([
             "code" => 200,
             "status" => "SUCCESS",
-            "data" => []
+            "data" => request()->only('key'),
+            "ini body yang dikirim" => request()->all()
         ]);
     }
 }

@@ -1,0 +1,38 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dokumentasi API",
+        "description": "Lorem Ipsum",
+        "contact": {
+            "email": "hi.wasissubekti02@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api/v1/",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/test": {
+            "post": {
+                "tags": [
+                    "Test"
+                ],
+                "summary": "Test",
+                "description": "TestAPI",
+                "operationId": "test",
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    }
+                }
+            }
+        }
+    }
+}

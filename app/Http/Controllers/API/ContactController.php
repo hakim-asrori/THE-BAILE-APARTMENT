@@ -35,7 +35,7 @@ class ContactController extends Controller
      *      ),
      *       @OA\Response(
      *           response="200",
-     *           description="success!",
+     *           description="successfully!",
      *      ),
      *       @OA\Response(
      *           response="500",
@@ -119,7 +119,7 @@ class ContactController extends Controller
      *      ),
      *       @OA\Response(
      *           response="201",
-     *           description="created successfully!",
+     *           description="created!",
      *      ),
      *       @OA\Response(
      *           response="422",
@@ -166,7 +166,7 @@ class ContactController extends Controller
      *      ),
      *       @OA\Response(
      *           response="200",
-     *           description="data successfully!",
+     *           description="successfully!",
      *      ),
      *       @OA\Response(
      *           response="404",
@@ -200,7 +200,7 @@ class ContactController extends Controller
      *      ),
      *       @OA\Response(
      *           response="200",
-     *           description="data successfully!",
+     *           description="deleted!",
      *      ),
      *       @OA\Response(
      *           response="404",

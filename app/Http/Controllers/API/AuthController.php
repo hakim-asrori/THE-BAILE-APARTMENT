@@ -35,6 +35,10 @@ class AuthController extends Controller
      *           description="email or password wrong!",
      *      ),
      *       @OA\Response(
+     *           response="422",
+     *           description="body validation!",
+     *      ),
+     *       @OA\Response(
      *           response="500",
      *           description="internal server error!",
      *      ),

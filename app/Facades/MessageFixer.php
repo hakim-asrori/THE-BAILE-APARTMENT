@@ -46,4 +46,9 @@ class MessageFixer extends JsonResponse
             "data" => $data
         ], $code);
     }
+
+    public static function render($data = [], $code = self::HTTP_OK)
+    {
+        return response()->json($data, $code);
+    }
 }

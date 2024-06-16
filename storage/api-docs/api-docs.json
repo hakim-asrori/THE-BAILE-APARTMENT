@@ -57,6 +57,160 @@
                     "400": {
                         "description": "email or password wrong!"
                     },
+                    "422": {
+                        "description": "body validation!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/contact/view": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact View",
+                "description": "Contact View",
+                "operationId": "Contact View",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search (by name or email)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/contact/store": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact Store",
+                "description": "Contact Store",
+                "operationId": "Contact Store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "schema": "Contact",
+                                "title": "store",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "time": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "name": "Dzikri Faza",
+                                    "email": "dzikri.faza@mailinator.com",
+                                    "phone": "089606265960",
+                                    "date": "2024-06-06",
+                                    "time": "10:00",
+                                    "message": "Lorem ipsum dolor sit amet."
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created successfully!"
+                    },
+                    "422": {
+                        "description": "body validation!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/contact/show/{id}": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact Show",
+                "description": "Contact Show",
+                "operationId": "Contact Show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data successfully!"
+                    },
+                    "404": {
+                        "description": "not found!"
+                    }
+                }
+            }
+        },
+        "/contact/delete/{id}": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact Delete",
+                "description": "Contact Delete",
+                "operationId": "Contact Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data successfully!"
+                    },
+                    "404": {
+                        "description": "not found!"
+                    },
                     "500": {
                         "description": "internal server error!"
                     }
@@ -78,5 +232,22 @@
                 }
             }
         }
-    }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "description": "Bearer 6|du7SsoblaDWr6th9FsjHeq1byqqSaDfrbRcRAuU9bde66186",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "sanctum": []
+        }
+    ]
 }

@@ -61,7 +61,13 @@ return [
              * Middleware allows to prevent unexpected access to API documentation
             */
             'middleware' => [
-                'api' => [],
+                'api' => [
+                    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+                    \Illuminate\Session\Middleware\StartSession::class,
+                    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+                    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+                    \Laravel\Sanctum\Http\Middleware\AuthenticateSession::class,
+                ],
                 'asset' => [],
                 'docs' => [],
                 'oauth2_callback' => [],
@@ -191,18 +197,22 @@ return [
                         ],
                     ],
                 ],
+                */
                 'sanctum' => [ // Unique name of security
-                    'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
-                    'description' => 'Enter token in format (Bearer <token>)',
+                    'type' => 'http', // Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Bearer 6|du7SsoblaDWr6th9FsjHeq1byqqSaDfrbRcRAuU9bde66186',
                     'name' => 'Authorization', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
+                    'scheme' => 'bearer',
+                    'bearerFormat' => 'JWT'
                 ],
-                */],
+            ],
             'security' => [
                 /*
                  * Examples of Securities
                 */
                 [
+                    'sanctum' => []
                     /*
                     'oauth2_security_example' => [
                         'read',
@@ -210,7 +220,8 @@ return [
                     ],
 
                     'passport' => []
-                    */],
+                    */
+                ],
             ],
         ],
 

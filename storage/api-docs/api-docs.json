@@ -19,6 +19,50 @@
         }
     ],
     "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Login",
+                "description": "API Login",
+                "operationId": "login",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "schema": "Login",
+                                "title": "login",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "email": "admin@mailinator.com",
+                                    "password": "password"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "login successfully!"
+                    },
+                    "400": {
+                        "description": "email or password wrong!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
         "/test": {
             "post": {
                 "tags": [

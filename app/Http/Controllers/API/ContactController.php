@@ -84,8 +84,9 @@ class ContactController extends Controller
      *      summary="Contact Store",
      *      description="Contact Store",
      *      @OA\RequestBody(
+     *         required=true,
      *         @OA\MediaType(
-     *             mediaType="application/json",
+     *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 schema="Contact",
      *                 title="store",
@@ -113,7 +114,6 @@ class ContactController extends Controller
      *                     property="message",
      *                     type="string"
      *                 ),
-     *                 example={"name": "Dzikri Faza", "email": "dzikri.faza@mailinator.com", "phone": "089606265960", "date": "2024-06-06", "time": "10:00", "message": "Lorem ipsum dolor sit amet."}
      *             )
      *         )
      *      ),

@@ -30,7 +30,7 @@ class StoreRequest extends FormRequest
             "features" => "required|array",
             "features.*.icon" => "required|max:20",
             "features.*.name" => "required|max:50",
-            "image" => "required|image|mimes:png,jpg,jpeg",
+            "image" => "required|image|max:5120|mimes:png,jpg,jpeg",
         ];
     }
 

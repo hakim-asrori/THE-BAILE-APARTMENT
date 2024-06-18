@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\API\Facility;
+namespace App\Http\Requests\API\Room;
 
 use App\Facades\MessageFixer;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,13 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => "required|max:100",
-            "description" => "required|max:255",
-            "features" => "required|array",
-            "features.*.icon" => "required|max:20",
-            "features.*.name" => "required|max:50",
-            "image" => "image|max:5120|mimes:png,jpg,jpeg",
+            'title' => 'required|max:100',
+            'description' => 'required|max:500',
+            'features' => 'required|array',
+            'features.*.type' => 'required|in:1,2,3',
+            'features.*.name' => 'required|max:75',
+            'images' => 'required|array|max:4',
+            'images.*' => 'image|mimes:png,jpg,jpeg|max:5120'
         ];
     }
 

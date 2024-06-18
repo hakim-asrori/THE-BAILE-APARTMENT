@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\API\Facility;
+namespace App\Http\Requests\API\Room;
 
 use App\Facades\MessageFixer;
 use Illuminate\Contracts\Validation\Validator;
@@ -25,12 +25,8 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "title" => "required|max:100",
-            "description" => "required|max:255",
-            "features" => "required|array",
-            "features.*.icon" => "required|max:20",
-            "features.*.name" => "required|max:50",
-            "image" => "image|max:5120|mimes:png,jpg,jpeg",
+            'title' => 'required|max:100',
+            'description' => 'required|max:500',
         ];
     }
 

@@ -182,6 +182,8 @@ class FacilityController extends Controller
 
     public function update(UpdateRequest $request, $id)
     {
+        DB::beginTransaction();
+
         $facility = $this->facility->selectRaw('id, thumbnail')->find($id);
         if (!$facility) {
             return MessageFixer::warning("data not found!", MessageFixer::HTTP_NOT_FOUND);
@@ -211,6 +213,8 @@ class FacilityController extends Controller
 
     public function delete($id)
     {
+        DB::beginTransaction();
+
         $facility = $this->facility->selectRaw('id, thumbnail')->find($id);
         if (!$facility) {
             return MessageFixer::warning("data not found!", MessageFixer::HTTP_NOT_FOUND);

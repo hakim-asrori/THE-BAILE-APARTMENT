@@ -75,7 +75,7 @@ class EnquireController extends Controller
 
     public function show($id)
     {
-        $contact = $this->contact->selectRaw('id, name, email, phone, date, time, created_at')->find($id);
+        $contact = $this->contact->selectRaw('contacts.id, contacts.name, contacts.email, contacts.phone, contacts.date, contacts.time, contacts.created_at, rooms.title as title_room')->leftJoin('rooms', 'contacts.room_id', '=', 'rooms.id')->find($id);
         if (!$contact) {
             return MessageFixer::warning("data not found!", MessageFixer::HTTP_NOT_FOUND);
         }

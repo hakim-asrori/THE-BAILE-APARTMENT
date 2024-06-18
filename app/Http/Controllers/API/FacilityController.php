@@ -9,6 +9,7 @@ use App\Http\Requests\API\Facility\UpdateRequest;
 use App\Models\Facility;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FacilityController extends Controller
 {
@@ -181,13 +182,14 @@ class FacilityController extends Controller
 
     public function update(UpdateRequest $request, $id)
     {
-        $facility = $this->facility->selectRaw('id')->find($id);
+        $facility = $this->facility->selectRaw('id, thumbnail')->find($id);
         if (!$facility) {
             return MessageFixer::warning("data not found!", MessageFixer::HTTP_NOT_FOUND);
         }
 
         try {
             if ($request->hasFile('image')) {
+                Storage::delete(str_replace(asset('storage') . '/', '', $facility->thumbnail));
                 $request->merge([
                     "thumbnail" => $request->file('image')->store('facilities')
                 ]);
@@ -200,7 +202,7 @@ class FacilityController extends Controller
             }
 
             DB::commit();
-            return MessageFixer::created('facility has been updated!');
+            return MessageFixer::success('facility has been updated!');
         } catch (\Throwable $th) {
             DB::rollBack();
             return MessageFixer::error($th->getMessage());
@@ -209,17 +211,19 @@ class FacilityController extends Controller
 
     public function delete($id)
     {
-        $facility = $this->facility->selectRaw('id')->find($id);
+        $facility = $this->facility->selectRaw('id, thumbnail')->find($id);
         if (!$facility) {
             return MessageFixer::warning("data not found!", MessageFixer::HTTP_NOT_FOUND);
         }
 
         try {
+            Storage::delete(str_replace(asset('storage') . '/', '', $facility->thumbnail));
+
             $facility->features()->delete();
             $facility->delete();
 
             DB::commit();
-            return MessageFixer::created('facility has been deleted!');
+            return MessageFixer::success('facility has been deleted!');
         } catch (\Throwable $th) {
             DB::rollBack();
             return MessageFixer::error($th->getMessage());

@@ -91,4 +91,11 @@ class AuthController extends Controller
     {
         return MessageFixer::success(messages: "user Authenticated", data: $request->user());
     }
+
+    public function generateToken()
+    {
+        return MessageFixer::success(messages: "Generate Successfully", data: [
+            "token" => bcrypt(env('APP_KEY', 'THE BAILE APARTMENT'))
+        ]);
+    }
 }

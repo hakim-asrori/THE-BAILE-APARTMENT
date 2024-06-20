@@ -1,39 +1,34 @@
-<script>
-export default {
-    data() {
-        return {
-            testResult: {}
-        }
-    },
-    computed: {
-        formData() {
-            let formData = new FormData();
-
-            formData.append("key", "value");
-
-            return formData;
-        },
-    },
-    mounted() {
-        this.getTestApi()
-    },
-    methods: {
-        getTestApi() {
-            this.$store.dispatch("postData", ["test", this.formData])
-                .then((response) => {
-                    this.testResult = response
-                }).catch((err) => {
-                    console.log(err);
-                });
-        }
-    },
-}
-</script>
-
 <template>
-    <h1>
-        Ini Halaman Home
-    </h1>
+    <section>
+        <video class="responsive-video" autoplay loop muted>
+            <source src="../../../videos/vid-1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo
+            laudantium dolore molestias repellat quas deleniti doloremque
+            minima, itaque tenetur perspiciatis beatae doloribus neque
+            repudiandae esse, ipsum sapiente sunt. Quibusdam, laudantium.
+        </p>
+    </section>
+    <div class="video-container">
+        <h1>Ini Halaman Home</h1>
 
-    <p>Result API : {{ testResult }}</p>
+        <p>Result API :</p>
+    </div>
 </template>
+
+<style scoped>
+.video-container {
+    max-width: 800px;
+    /* margin: 0 auto; */
+    /* padding: 20px; */
+}
+
+.responsive-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+
+}
+</style>

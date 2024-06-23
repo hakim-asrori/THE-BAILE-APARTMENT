@@ -16,28 +16,28 @@
                     “One Step Away From Everything”
                 </div>
                 <div
-                    class="text-sm pl-5 text-[#5F3F2F] flex font-sans border border-black h-[550px]"
+                    class="text-sm pl-5 text-[#5F3F2F] flex font-sans h-[550px]"
                 >
                     <div class="flex flex-col">
                         The Baile is strategically located in Menteng, a premium
                         and strategic area at the heart of the city. Now you can
                         reach every desired destination in just a step away.
-                        <div class="border border-purple-300 h-full">
+                        <div class="flex flex-col h-full">
                             <img
                                 src="../../../images/baile-maps.png"
                                 alt="BAILE MAPS"
                                 class="w-full h-auto"
                             />
                             <div
-                                class="flex justify-center h-full w-full border border-purple-400"
+                                class="flex justify-center items-end h-full w-full"
                             >
                                 <div
-                                    class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-lg flex justify-between items-center cursor-pointer"
+                                    class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-3xl flex justify-between items-center cursor-pointer"
                                 >
-                                    <p class="font-sans text-white">
+                                    <p class="font-sans text-white pl-2">
                                         VIEW ON GOOGLE MAPS
                                     </p>
-                                    <i class="maps-ic"></i>
+                                    <i class="maps-ic pr-2"></i>
                                 </div>
                             </div>
                         </div>
@@ -71,40 +71,17 @@
                     </div>
                 </div>
             </div>
-            <div>
                 <div class="bg-[#BF8E44] h-full">
-                    <div class="border border-purple-500 p-6 flex justify-end mr-5">
-                        <div class="text-[#2A4B2C] text-xl font-spectral bg-[#CFCE9B] p-2 rounded-lg">
-                            Facilities
+                    <div class="p-6 flex justify-end mr-5">
+                        <div class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg">
+                            <p class="pr-2">Facilities</p>
+                            <i class="right-arrow-ic"></i>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg"
-            />
+        <div class="carousel-item h-80">
+            <Footer/>
         </div>
     </div>
 </template>
@@ -112,6 +89,7 @@
 <script setup>
 import { onMounted } from "vue";
 import store from "../../store";
+import Footer from "../../components/Footer.vue"
 
 const fetchData = async () => {
     await store.dispatch("postData", ["public/room/view", {}]).then().catch();
@@ -138,14 +116,15 @@ const backgroundSvg = {
     /* margin: 0 auto; */
     /* padding: 20px; */
 }
-
 .responsive-video {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
 }
-
 .maps-ic {
     content: url("../../../icons/maps-ic.svg");
+}
+.right-arrow-ic {
+    content: url("../../../icons/right-arrow-ic.svg");
 }
 </style>

@@ -71,17 +71,19 @@
                     </div>
                 </div>
             </div>
-                <div class="bg-[#BF8E44] h-full">
-                    <div class="p-6 flex justify-end mr-5">
-                        <div class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg">
-                            <p class="pr-2">Facilities</p>
-                            <i class="right-arrow-ic"></i>
-                        </div>
+            <div class="bg-[#BF8E44] h-full">
+                <div class="p-6 flex justify-end mr-5">
+                    <div
+                        class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
+                    >
+                        <p class="pr-2">Facilities</p>
+                        <i class="right-arrow-ic"></i>
                     </div>
                 </div>
+            </div>
         </div>
         <div class="carousel-item h-80">
-            <Footer/>
+            <Footer />
         </div>
     </div>
 </template>
@@ -89,7 +91,7 @@
 <script setup>
 import { onMounted } from "vue";
 import store from "../../store";
-import Footer from "../../components/Footer.vue"
+import Footer from "../../components/Footer.vue";
 
 const fetchData = async () => {
     await store.dispatch("postData", ["public/room/view", {}]).then().catch();

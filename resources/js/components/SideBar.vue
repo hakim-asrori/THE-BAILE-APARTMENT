@@ -30,7 +30,7 @@
                     <li class="my-5">
                         <router-link
                             to="/"
-                            class="flex items-center p-2 rounded transition-colors duration-300 hover:bg-yellow-300 hover:text-white"
+                            class="flex items-center p-2 text-xl rounded transition-colors duration-300 hover:bg-yellow-300 hover:text-white"
                             :class="{
                                 'font-bold': $route.path === '/',
                                 'bg-[#BF9B44]': $route.path === '/',

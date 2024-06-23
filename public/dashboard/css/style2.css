@@ -1,0 +1,9 @@
+.form-control:disabled,
+.form-control:read-only {
+    background-color: #e9ecef !important;
+}
+
+.form-select:disabled,
+.form-select:read-only {
+    background-color: #e9ecef !important;
+}

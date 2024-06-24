@@ -1,9 +1,11 @@
 import auth from "./services/auth";
 import dashboard from "./services/dashboard";
+import enquire from "./services/enquire";
 
 const routes = [
     ...auth,
     ...dashboard,
+    ...enquire,
     {
         path: "/",
         name: "home",

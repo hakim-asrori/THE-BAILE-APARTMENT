@@ -9,6 +9,7 @@ module.exports = {
     theme: {
         colors: {
             primaryColor: "#5F3F2F",
+            backgroundColor: '#E7E6D4',
             transparent: "transparent",
             current: "currentColor",
             black: colors.black,
@@ -17,7 +18,7 @@ module.exports = {
             emerald: colors.emerald,
             indigo: colors.indigo,
             yellow: colors.yellow,
-            red: colors.red
+            red: colors.red,
         },
         extend: {
             fontFamily: {

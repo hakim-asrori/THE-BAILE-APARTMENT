@@ -12,9 +12,6 @@ const routes = [
         path: "/",
         name: "home",
         component: () => import("../views/home/IndexView.vue"),
-        meta: {
-            requiresAuth: false,
-        },
     },
 ];
 

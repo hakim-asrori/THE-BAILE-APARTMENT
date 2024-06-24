@@ -19,26 +19,32 @@
         }
     ],
     "paths": {
-        "/test": {
+        "/auth/login": {
             "post": {
                 "tags": [
-                    "Test"
+                    "Login"
                 ],
-                "summary": "Test",
-                "description": "TestAPI",
-                "operationId": "test",
+                "summary": "Login",
+                "description": "API Login",
+                "operationId": "login",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
+                                "schema": "Login",
+                                "title": "login",
                                 "properties": {
-                                    "key": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
                                         "type": "string"
                                     }
                                 },
                                 "type": "object",
                                 "example": {
-                                    "key": "value"
+                                    "email": "admin@mailinator.com",
+                                    "password": "password"
                                 }
                             }
                         }
@@ -46,10 +52,268 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Ok"
+                        "description": "login successfully!"
+                    },
+                    "400": {
+                        "description": "email or password wrong!"
+                    },
+                    "422": {
+                        "description": "body validation!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/contact/view": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact View",
+                "description": "Contact View",
+                "operationId": "Contact View",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search (by name or email)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successfully!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/contact/store": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact Store",
+                "description": "Contact Store",
+                "operationId": "Contact Store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "schema": "Contact",
+                                "title": "store",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "time": {
+                                        "type": "string"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created!"
+                    },
+                    "422": {
+                        "description": "body validation!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/contact/show/{id}": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact Show",
+                "description": "Contact Show",
+                "operationId": "Contact Show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successfully!"
+                    },
+                    "404": {
+                        "description": "not found!"
+                    }
+                }
+            }
+        },
+        "/contact/delete/{id}": {
+            "post": {
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Contact Delete",
+                "description": "Contact Delete",
+                "operationId": "Contact Delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "deleted!"
+                    },
+                    "404": {
+                        "description": "not found!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/facility/view": {
+            "post": {
+                "tags": [
+                    "Facility"
+                ],
+                "summary": "Facility View",
+                "description": "Facility View",
+                "operationId": "Facility View",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search (by name or email)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successfully!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
+                    }
+                }
+            }
+        },
+        "/facility/store": {
+            "post": {
+                "tags": [
+                    "Facility"
+                ],
+                "summary": "Facility Store",
+                "description": "Facility Store",
+                "operationId": "Facility Store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "schema": "Facility",
+                                "title": "store",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "features[]": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "icon": {
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created!"
+                    },
+                    "422": {
+                        "description": "body validation!"
+                    },
+                    "500": {
+                        "description": "internal server error!"
                     }
                 }
             }
         }
-    }
+    },
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "description": "Bearer 6|du7SsoblaDWr6th9FsjHeq1byqqSaDfrbRcRAuU9bde66186",
+                "name": "Authorization",
+                "in": "header",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "sanctum": []
+        }
+    ]
 }

@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Dokumentasi API",
-        "description": "Lorem Ipsum",
+        "title": "Dokumentasi API v1",
+        "description": "",
         "contact": {
-            "email": "hi.wasissubekti02@gmail.com"
+            "email": "hakimasrori24@gmail.com"
         },
         "license": {
             "name": "Apache 2.0",
@@ -14,8 +14,8 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/api/v1/",
-            "description": "Demo API Server"
+            "url": "http://127.0.0.1:8000/api/v1",
+            "description": "API Server"
         }
     ],
     "paths": {
@@ -27,6 +27,23 @@
                 "summary": "Test",
                 "description": "TestAPI",
                 "operationId": "test",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "key": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object",
+                                "example": {
+                                    "key": "value"
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Ok"

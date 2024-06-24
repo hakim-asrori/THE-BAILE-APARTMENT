@@ -2,12 +2,14 @@ import auth from "./services/auth";
 import dashboard from "./services/dashboard";
 import enquire from "./services/enquire";
 import contact from "./services/contact";
+import gallery from "./services/gallery";
 
 const routes = [
     ...auth,
     ...dashboard,
     ...enquire,
     ...contact,
+    ...gallery,
     {
         path: "/",
         name: "home",

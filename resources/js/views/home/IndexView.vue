@@ -7,50 +7,52 @@
             </video>
             <!-- <img src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" /> -->
         </div>
-        <div class="carousel-item h-full flex flex-col">
-            <div class="pl-8 pt-10">
-                <div class="text-4xl text-[#5F3F2F] font-spectral">
-                    <u>The Baile Apartment</u>
-                </div>
-                <div class="text-xl pl-5 pt-5 text-[#5F3F2F] font-sans">
-                    “One Step Away From Everything”
-                </div>
+        <div class="carousel-item h-full pl-8 pt-5 flex flex-col">
+            <u class="text-4xl text-[#5F3F2F] font-spectral"
+                >The Baile Apartment</u
+            >
+            <p class="text-xl pl-5 pt-5 text-[#5F3F2F] font-sans">
+                “One Step Away From Everything”
+            </p>
+            <div
+                class="text-sm pl-5 text-[#5F3F2F] flex font-sans h-full"
+            >
                 <div
-                    class="text-sm pl-5 text-[#5F3F2F] flex font-sans h-[550px]"
+                    class="flex flex-col h-auto w-auto"
                 >
-                    <div class="flex flex-col">
-                        The Baile is strategically located in Menteng, a premium
-                        and strategic area at the heart of the city. Now you can
-                        reach every desired destination in just a step away.
-                        <div class="flex flex-col h-full">
-                            <img
-                                src="../../../images/baile-maps.png"
-                                alt="BAILE MAPS"
-                                class="w-full h-auto"
-                            />
-                            <div
-                                class="flex justify-center items-end h-full w-full"
-                            >
-                                <div
-                                    class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-3xl flex justify-between items-center cursor-pointer"
-                                >
-                                    <p class="font-sans text-white pl-2">
-                                        VIEW ON GOOGLE MAPS
-                                    </p>
-                                    <i class="maps-ic pr-2"></i>
-                                </div>
-                            </div>
-                        </div>
+                    The Baile is strategically located in Menteng, a premium and
+                    strategic area at the heart of the city. Now you can reach
+                    every desired destination in just a step away.
+                    <div class="flex flex-col flex-grow mt-5">
+                        <img
+                            src="../../../images/baile-maps.png"
+                            alt="BAILE MAPS"
+                            class="w-full h-full"
+                        />
                     </div>
                     <div
-                        class="basis-1/2 bg-[url('/public/images/home-bg.svg')] bg-no-repeat bg-right-top"
+                        class="flex justify-center items-end flex-grow w-full h-auto"
                     >
-                        <div class="ml-20 p-3 h-full">
-                            <div
+                        <div
+                            class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-3xl flex justify-between items-center cursor-pointer"
+                        >
+                            <p class="font-sans text-white pl-2">
+                                VIEW ON GOOGLE MAPS
+                            </p>
+                            <i class="maps-ic pr-2"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-[25vw] h-full hidden md:block">
+                    <div
+                        class="bg-[url('/public/images/home-bg.svg')] bg-no-repeat bg-cover ml-5 pt-5 pb-5 h-full rounded-lg"
+                    >
+                        <div class="ml-10 p-3">
+                            <p
                                 class="font-spectral text-4xl flex justify-center text-center text-white"
                             >
                                 The Perfect Location
-                            </div>
+                            </p>
                             <div class="font-sans text-base mt-5">
                                 <ol class="list-disc">
                                     <li>Walking Distance to RSCM & FK UI</li>
@@ -71,7 +73,9 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-[#BF8E44] h-full">
+        </div>
+        <div class="carousel-item flex flex-col">
+            <div class="bg-[rgb(191,142,68)]">
                 <div class="p-6 flex justify-end mr-5">
                     <div
                         class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"

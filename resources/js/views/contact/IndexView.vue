@@ -1,8 +1,6 @@
 <template>
     <div class="h-full carousel carousel-vertical w-full">
-        <div
-            class="carousel-item flex h-full gap-3 m-4 pt-4"
-        >
+        <div class="carousel-item flex h-full gap-3 m-4 pt-4">
             <div class="w-full">
                 <p class="text-3xl font-spectral text-primaryColor">CONTACT</p>
                 <p class="text-md font-sans text-[#A2A2A2] pt-3">
@@ -118,14 +116,14 @@ Message </textarea
                     <div
                         class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
                     >
-                        <p class="pr-2">Home</p>
+                        <p class="pr-2">Enquire Now</p>
                         <i class="right-arrow-ic"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="carousel-item flex flex-col">
-            <Footer/>
+            <Footer />
         </div>
     </div>
 </template>

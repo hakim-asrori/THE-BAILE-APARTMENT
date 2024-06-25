@@ -3,6 +3,7 @@ import dashboard from "./services/dashboard";
 import enquire from "./services/enquire";
 import contact from "./services/contact";
 import gallery from "./services/gallery";
+import facilities from "./services/facilities";
 
 const routes = [
     ...auth,
@@ -10,6 +11,7 @@ const routes = [
     ...enquire,
     ...contact,
     ...gallery,
+    ...facilities,
     {
         path: "/",
         name: "home",

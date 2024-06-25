@@ -84,8 +84,30 @@
                 </div>
             </div>
         </div>
+        <div class="carousel-item flex flex-col">
+            <div class="bg-[#BF8E44] h-full">
+                <div class="p-6 flex justify-end mr-5">
+                    <div
+                        class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
+                    >
+                        <p class="pr-2">Contact</p>
+                        <i class="right-arrow-ic"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item flex flex-col">
+            <Footer />
+        </div>
     </div>
-    <!-- <div>
-        asdasdasd
-    </div> -->
 </template>
+
+<script setup>
+import Footer from "../../components/Footer.vue";
+</script>
+
+<style scoped>
+.right-arrow-ic {
+    content: url("../../../icons/right-arrow-ic.svg");
+}
+</style>

@@ -4,6 +4,7 @@ import enquire from "./services/enquire";
 import contact from "./services/contact";
 import gallery from "./services/gallery";
 import facilities from "./services/facilities";
+import roomType from "./services/room-type";
 
 const routes = [
     ...auth,
@@ -12,6 +13,7 @@ const routes = [
     ...contact,
     ...gallery,
     ...facilities,
+    ...roomType,
     {
         path: "/",
         name: "home",

@@ -77,12 +77,13 @@
         <div class="carousel-item flex flex-col">
             <div class="bg-[rgb(191,142,68)]">
                 <div class="p-6 flex justify-end mr-5">
-                    <div
+                    <a
                         class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
+                        href="/facilities"
                     >
                         <p class="pr-2">Facilities</p>
                         <i class="right-arrow-ic"></i>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

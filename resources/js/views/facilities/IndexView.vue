@@ -360,12 +360,13 @@
         <div class="carousel-item flex flex-col pt-5">
             <div class="bg-[#BF8E44] h-full">
                 <div class="p-6 flex justify-end mr-5">
-                    <div
+                    <a
                         class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
+                        href="/room-type"
                     >
                         <p class="pr-2">Room Type</p>
                         <i class="right-arrow-ic"></i>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -385,6 +386,7 @@ const activeDescription = ref(1); // Set deskripsi pertama sebagai default yang 
 const setActiveDescription = (index) => {
     activeDescription.value = index;
 };
+
 </script>
 
 <style scoped>
@@ -412,7 +414,7 @@ const setActiveDescription = (index) => {
 }
 
 .ease-in-out {
-    transition-timing-function: ease-in-out; /* Fungsi timing transisi */
+    transition-timing-function: ease-in-out;
 }
 .freezer-ic::before {
     content: url("../../../icons/freezer.svg");

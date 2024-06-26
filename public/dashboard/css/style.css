@@ -1759,8 +1759,8 @@ progress {
 .form-control {
   display: block;
   width: 100%;
-  padding: 0.375rem 0.75rem;
-  font-size: 0.875rem;
+  padding: .375rem .75rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #969ba0;
@@ -20851,13 +20851,9 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 .form-control {
   background: #fff;
   border: 0.0625rem solid #f5f5f5;
-  padding: 0.3125rem 1.25rem;
   color: #6e6e6e;
-  height: 3.5rem;
+  height: auto;
   border-radius: 0.5rem; }
-  @media only screen and (max-width: 1400px) {
-    .form-control {
-      height: 2.5rem; } }
   .form-control:hover, .form-control:focus, .form-control.active {
     box-shadow: none;
     background: #fff;

@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 const router = createRouter({
     history: createWebHistory(),
     routes,
+    linkActiveClass: "mm-active",
 });
 
 router.beforeEach((to, form, next) => {

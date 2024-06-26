@@ -1,9 +1,13 @@
+.form-control {
+    border-color: #dee2e6 !important;
+}
+
 .form-control:disabled,
-.form-control:read-only {
+.form-control[readonly] {
     background-color: #e9ecef !important;
 }
 
 .form-select:disabled,
-.form-select:read-only {
+.form-select[readonly] {
     background-color: #e9ecef !important;
 }

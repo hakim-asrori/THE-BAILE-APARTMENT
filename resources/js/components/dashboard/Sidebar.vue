@@ -77,31 +77,70 @@
                     </div>
                 </li>
                 <li>
-                    <a
-                        class="has-arrow ai-icon"
-                        href="javascript:void()"
+                    <router-link
+                        :to="{ name: 'dashboard.index' }"
+                        class="ai-icon"
                         aria-expanded="false"
+                        @click="changeTitleBar('Dashboard')"
                     >
                         <i class="flaticon-025-dashboard"></i>
                         <span class="nav-text">Dashboard</span>
-                    </a>
-                    <ul aria-expanded="false">
-                        <li><a href="index.html">Dashboard Light</a></li>
-                        <li><a href="index-2.html">Dashboard Dark</a></li>
-                        <li><a href="my-wallet.html">My Wallet</a></li>
-                        <li><a href="page-invoices.html">Invoices</a></li>
-                        <li>
-                            <a href="cards-center.html">Cards Center</a>
-                        </li>
-                        <li>
-                            <a href="page-transaction.html">Transaction</a>
-                        </li>
-                        <li>
-                            <a href="transaction-details.html"
-                                >Transaction Details</a
-                            >
-                        </li>
-                    </ul>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link
+                        :to="{ name: 'facility.index' }"
+                        class="ai-icon"
+                        aria-expanded="false"
+                        @click="changeTitleBar('Facilities')"
+                    >
+                        <i class="flaticon-013-checkmark"></i>
+                        <span class="nav-text">Facilities</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link
+                        :to="{ name: 'room.index' }"
+                        class="ai-icon"
+                        aria-expanded="false"
+                        @click="changeTitleBar('Room Type')"
+                    >
+                        <i class="flaticon-046-home"></i>
+                        <span class="nav-text">Room Type</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link
+                        :to="{ name: 'gallery.index' }"
+                        class="ai-icon"
+                        aria-expanded="false"
+                        @click="changeTitleBar('Gallery')"
+                    >
+                        <i class="flaticon-381-picture"></i>
+                        <span class="nav-text">Gallery</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link
+                        :to="{ name: 'contact.index' }"
+                        class="ai-icon"
+                        aria-expanded="false"
+                        @click="changeTitleBar('Contact')"
+                    >
+                        <i class="flaticon-381-phone-call"></i>
+                        <span class="nav-text">Contact</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link
+                        :to="{ name: 'enquire.index' }"
+                        class="ai-icon"
+                        aria-expanded="false"
+                        @click="changeTitleBar('Enquire')"
+                    >
+                        <i class="flaticon-381-notebook"></i>
+                        <span class="nav-text">Enquire</span>
+                    </router-link>
                 </li>
             </ul>
             <div class="copyright">
@@ -126,4 +165,15 @@ const handleLogout = () => {
     jsCookie.remove("baile");
     window.location.replace("/auth/login");
 };
+
+const changeTitleBar = (text) => {
+    $(".dashboard_bar").text(text);
+    $(document).on("click", "#menu .ai-icon", function () {
+        $("#menu li").removeClass("mm-active");
+
+        $(this).parents("li").addClass("mm-active");
+    });
+};
 </script>
+
+<style></style>

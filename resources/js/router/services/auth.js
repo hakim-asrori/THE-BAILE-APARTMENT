@@ -1,8 +1,8 @@
 export default [
     {
-        path: '/auth/login',
+        path: '/sign',
         name: 'auth.login',
-        component: () => import("../../views/auth/LoginView.vue"),
+        component: () => import("../../core/AuthCore.vue"),
         meta: {
             requiresAuth: false
         }

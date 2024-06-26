@@ -12,7 +12,7 @@ return [
                 /*
                  * Route for accessing api documentation interface
                 */
-                'api' => 'api/documentation',
+                'api' => 'backend/documentation',
             ],
             'paths' => [
                 /*
@@ -55,7 +55,7 @@ return [
             /*
              * Route for Oauth2 authentication callback.
             */
-            'oauth2_callback' => 'api/oauth2-callback',
+            'oauth2_callback' => 'backend/oauth2-callback',
 
             /*
              * Middleware allows to prevent unexpected access to API documentation
@@ -303,7 +303,7 @@ return [
          * Constants which can be used in annotations
          */
         'constants' => [
-            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://127.0.0.1:8000/api/v1/'),
+            'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://127.0.0.1:8000/api/v1'),
         ],
     ],
 ];

@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 /**
  * @OA\Info(
  *      version="1.0.0",
- *      title="Dokumentasi API",
- *      description="Lorem Ipsum",
+ *      title="Dokumentasi API v1",
+ *      description="",
  *      @OA\Contact(
- *          email="hi.wasissubekti02@gmail.com"
+ *          email="hakimasrori24@gmail.com"
  *      ),
  *      @OA\License(
  *          name="Apache 2.0",
@@ -18,7 +18,7 @@ namespace App\Http\Controllers;
  *
  * @OA\Server(
  *      url=L5_SWAGGER_CONST_HOST,
- *      description="Demo API Server"
+ *      description="API Server"
  * )
  */
 abstract class Controller

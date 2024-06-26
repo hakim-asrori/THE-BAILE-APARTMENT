@@ -13,7 +13,7 @@ router.beforeEach((to, form, next) => {
 
     if (to.meta.requiresAuth == true) {
         if (!token) {
-            window.location.replace("/auth/login");
+            window.location.replace("/sign");
         } else {
             next();
         }
@@ -21,7 +21,7 @@ router.beforeEach((to, form, next) => {
 
     if (to.meta.requiresAuth == false) {
         if (token) {
-            window.location.replace("/dashboard/index");
+            window.location.replace("/home");
         } else {
             next();
         }

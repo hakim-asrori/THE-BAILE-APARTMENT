@@ -31,6 +31,7 @@
 import { NavHeader, Header, Sidebar, Footer } from "../components/dashboard";
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import jsCookie from "js-cookie"
 
 const $store = useStore();
 const user = ref({});
@@ -50,6 +51,7 @@ const checkAuthenticated = async () => {
         user.value = userSelected;
         $store.state.user = userSelected;
     } catch (error) {
+        jsCookie.remove('baile')
         window.location.replace("/");
     }
 };

@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="flex h-screen">
+    <div id="app" class="flex h-screen bg-backgroundColor">
         <Sidebar />
         <div class="flex-1 overflow-y-auto">
             <router-view />

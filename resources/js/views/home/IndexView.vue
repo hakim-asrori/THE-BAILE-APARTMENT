@@ -7,50 +7,52 @@
             </video>
             <!-- <img src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" /> -->
         </div>
-        <div class="carousel-item h-full flex flex-col">
-            <div class="pl-8 pt-10">
-                <div class="text-4xl text-[#5F3F2F] font-spectral">
-                    <u>The Baile Apartment</u>
-                </div>
-                <div class="text-xl pl-5 pt-5 text-[#5F3F2F] font-sans">
-                    “One Step Away From Everything”
-                </div>
+        <div class="carousel-item h-full pl-8 pt-5 flex flex-col">
+            <u class="text-4xl text-[#5F3F2F] font-spectral"
+                >The Baile Apartment</u
+            >
+            <p class="text-xl pl-5 pt-5 text-[#5F3F2F] font-sans">
+                “One Step Away From Everything”
+            </p>
+            <div
+                class="text-sm pl-5 text-[#5F3F2F] flex font-sans h-full"
+            >
                 <div
-                    class="text-sm pl-5 text-[#5F3F2F] flex font-sans border border-black h-[550px]"
+                    class="flex flex-col h-auto w-auto"
                 >
-                    <div class="flex flex-col">
-                        The Baile is strategically located in Menteng, a premium
-                        and strategic area at the heart of the city. Now you can
-                        reach every desired destination in just a step away.
-                        <div class="border border-purple-300 h-full">
-                            <img
-                                src="../../../images/baile-maps.png"
-                                alt="BAILE MAPS"
-                                class="w-full h-auto"
-                            />
-                            <div
-                                class="flex justify-center h-full w-full border border-purple-400"
-                            >
-                                <div
-                                    class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-lg flex justify-between items-center cursor-pointer"
-                                >
-                                    <p class="font-sans text-white">
-                                        VIEW ON GOOGLE MAPS
-                                    </p>
-                                    <i class="maps-ic"></i>
-                                </div>
-                            </div>
-                        </div>
+                    The Baile is strategically located in Menteng, a premium and
+                    strategic area at the heart of the city. Now you can reach
+                    every desired destination in just a step away.
+                    <div class="flex flex-col flex-grow mt-5">
+                        <img
+                            src="../../../images/baile-maps.png"
+                            alt="BAILE MAPS"
+                            class="w-full h-full"
+                        />
                     </div>
                     <div
-                        class="basis-1/2 bg-[url('/public/images/home-bg.svg')] bg-no-repeat bg-right-top"
+                        class="flex justify-center items-end flex-grow w-full h-auto"
                     >
-                        <div class="ml-20 p-3 h-full">
-                            <div
+                        <div
+                            class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-3xl flex justify-between items-center cursor-pointer"
+                        >
+                            <p class="font-sans text-white pl-2">
+                                VIEW ON GOOGLE MAPS
+                            </p>
+                            <i class="maps-ic pr-2"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-[25vw] h-full hidden md:block">
+                    <div
+                        class="bg-[url('/public/images/home-bg.svg')] bg-no-repeat bg-cover ml-5 pt-5 pb-5 h-full rounded-lg"
+                    >
+                        <div class="ml-10 p-3">
+                            <p
                                 class="font-spectral text-4xl flex justify-center text-center text-white"
                             >
                                 The Perfect Location
-                            </div>
+                            </p>
                             <div class="font-sans text-base mt-5">
                                 <ol class="list-disc">
                                     <li>Walking Distance to RSCM & FK UI</li>
@@ -71,40 +73,22 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <div class="bg-[#BF8E44] h-full">
-                    <div class="border border-purple-500 p-6 flex justify-end mr-5">
-                        <div class="text-[#2A4B2C] text-xl font-spectral bg-[#CFCE9B] p-2 rounded-lg">
-                            Facilities
-                        </div>
-                    </div>
+        </div>
+        <div class="carousel-item flex flex-col">
+            <div class="bg-[rgb(191,142,68)]">
+                <div class="p-6 flex justify-end mr-5">
+                    <a
+                        class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
+                        href="/facilities"
+                    >
+                        <p class="pr-2">Facilities</p>
+                        <i class="right-arrow-ic"></i>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg"
-            />
-        </div>
-        <div class="carousel-item h-full">
-            <img
-                src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg"
-            />
+        <div class="carousel-item h-80">
+            <Footer />
         </div>
     </div>
 </template>
@@ -112,6 +96,7 @@
 <script setup>
 import { onMounted } from "vue";
 import store from "../../store";
+import Footer from "../../components/Footer.vue";
 
 const fetchData = async () => {
     await store.dispatch("postData", ["public/room/view", {}]).then().catch();
@@ -138,14 +123,15 @@ const backgroundSvg = {
     /* margin: 0 auto; */
     /* padding: 20px; */
 }
-
 .responsive-video {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
 }
-
 .maps-ic {
     content: url("../../../icons/maps-ic.svg");
+}
+.right-arrow-ic {
+    content: url("../../../icons/right-arrow-ic.svg");
 }
 </style>

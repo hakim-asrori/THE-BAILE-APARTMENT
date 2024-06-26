@@ -7,45 +7,24 @@
                         <div class="col-xl-12">
                             <div class="auth-form">
                                 <div class="d-flex justify-content-center mb-3">
-                                    <img
-                                        src="../../images/logo.png"
-                                        alt=""
-                                        style="height: 100px; width: 100px"
-                                    />
+                                    <img src="../../images/logo.png" alt="" style="height: 100px; width: 100px" />
                                 </div>
                                 <h4 class="text-center mb-4">
                                     Sign in your account
                                 </h4>
-                                <CForm
-                                    method="post"
-                                    @submit.prevent="handleSignIn"
-                                >
+                                <CForm method="post" @submit.prevent="handleSignIn">
                                     <div class="mb-3">
-                                        <CFormInput
-                                            type="email"
-                                            label="Email address"
-                                            v-model="form.email"
-                                            :invalid="errors.email"
-                                            :feedbackInvalid="errors.email"
-                                            :disabled="isLoading"
-                                        />
+                                        <CFormInput type="email" label="Email address" v-model="form.email"
+                                            :invalid="errors.email" :feedbackInvalid="errors.email"
+                                            :disabled="isLoading" />
                                     </div>
                                     <div class="mb-3">
-                                        <CFormInput
-                                            type="password"
-                                            label="Password"
-                                            v-model="form.password"
-                                            :invalid="errors.password"
-                                            :feedbackInvalid="errors.password"
-                                            :disabled="isLoading"
-                                        />
+                                        <CFormInput type="password" label="Password" v-model="form.password"
+                                            :invalid="errors.password" :feedbackInvalid="errors.password"
+                                            :disabled="isLoading" />
                                     </div>
                                     <div class="text-center">
-                                        <CButton
-                                            type="submit"
-                                            color="primary btn-block"
-                                            >Sign In</CButton
-                                        >
+                                        <CButton type="submit" color="primary btn-block">Sign In</CButton>
                                     </div>
                                 </CForm>
                             </div>
@@ -86,7 +65,7 @@ const handleSignIn = async () => {
         ]);
 
         jsCookie.set("baile", response.data.baile);
-        window.location.replace("/dashboard/index");
+        window.location.replace("/home");
     } catch (error) {
         isLoading.value = false;
 

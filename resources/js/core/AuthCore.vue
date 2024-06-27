@@ -67,10 +67,11 @@ const handleSignIn = async () => {
         jsCookie.set("baile", response.data.baile);
         window.location.replace("/home");
     } catch (error) {
+        console.log(error);
         isLoading.value = false;
 
-        if (error.response.status == $store.state.STATUS_CODE.VALIDATION) {
-            errors.value = error.response.data.messages;
+        if (error.response?.status == $store.state.STATUS_CODE.VALIDATION) {
+            errors.value = error.response?.data?.messages;
         }
 
         if (
@@ -79,7 +80,7 @@ const handleSignIn = async () => {
                 $store.state.STATUS_CODE.SERVER_ERROR,
             ].includes(error.response.status)
         ) {
-            $toast.error(error.response.data.messages, {
+            $toast.error(error.response?.data?.messages, {
                 position: "top",
             });
         }

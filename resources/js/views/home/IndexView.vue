@@ -98,9 +98,9 @@ import { onMounted } from "vue";
 import store from "../../store";
 import Footer from "../../components/Footer.vue";
 
-const fetchData = async () => {
-    await store.dispatch("postData", ["public/room/view", {}]).then().catch();
-};
+// const fetchData = async () => {
+//     await store.dispatch("postData", ["public/room/view", {}]).then().catch();
+// };
 
 onMounted(() => {
     console.log("nganu", import.meta.env);

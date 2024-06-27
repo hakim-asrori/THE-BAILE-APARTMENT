@@ -105,7 +105,7 @@ import Footer from "../../components/Footer.vue";
 onMounted(() => {
     console.log("nganu", import.meta.env);
     console.log("homeeepost");
-    fetchData();
+    // fetchData();
 });
 
 const backgroundSvg = {

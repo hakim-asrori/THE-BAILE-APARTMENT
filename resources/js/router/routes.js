@@ -5,6 +5,11 @@ import contact from "./services/dashboard/contact";
 import enquire from "./services/dashboard/enquire";
 import gallery from "./services/dashboard/gallery";
 import room from "./services/dashboard/room";
+import facilitesLanding from "./services/facilities";
+import roomTypeLanding from "./services/room-type";
+import galleryLanding from "./services/gallery";
+import contactLanding from "./services/contact";
+import enquireLanding from "./services/enquire";
 
 const routes = [
     ...auth,
@@ -14,6 +19,11 @@ const routes = [
     ...enquire,
     ...gallery,
     ...room,
+    ...facilitesLanding,
+    ...roomTypeLanding,
+    ...galleryLanding,
+    ...enquireLanding,
+    ...contactLanding,
     {
         path: "/",
         name: "home",

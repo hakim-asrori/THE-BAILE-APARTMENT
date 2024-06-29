@@ -19,6 +19,7 @@
 
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
+    <link href="{{ asset('dashboard') }}/vendor/lightgallery/css/lightgallery.min.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/css/style.css" rel="stylesheet">
 
@@ -28,6 +29,7 @@
     <div id="dashboard"></div>
 
     <script src="{{ asset('dashboard') }}/vendor/global/global.min.js"></script>
+    <script src="{{ asset('dashboard') }}/vendor/lightgallery/js/lightgallery-all.min.js"></script>
     <script src="{{ asset('dashboard') }}/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
 
     <script src="{{ asset('dashboard') }}/js/custom.min.js"></script>

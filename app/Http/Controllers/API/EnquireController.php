@@ -27,8 +27,11 @@ class EnquireController extends Controller
         if ($request->has('search')) {
             $query->where(function ($query) use ($request) {
                 $query->where('contacts.name', 'like', "%$request->search%");
-                $query->orWhere('contacts.email', 'like', "%$request->search%");
             });
+        }
+
+        if ($request->has('room') && $request->room != 0) {
+            $query->where("room_id", $request->room);
         }
 
         $query->leftJoin('rooms', 'contacts.room_id', '=', 'rooms.id');

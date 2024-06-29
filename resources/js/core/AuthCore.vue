@@ -10,7 +10,7 @@
                                     <img src="../../images/logo.png" alt="" style="height: 100px; width: 100px" />
                                 </div>
                                 <h4 class="text-center mb-4">
-                                    Sign in your account
+                                    Sign in your account {{ isLoading }}
                                 </h4>
                                 <CForm method="post" @submit.prevent="handleSignIn">
                                     <div class="mb-3">
@@ -24,7 +24,14 @@
                                             :disabled="isLoading" />
                                     </div>
                                     <div class="text-center">
-                                        <CButton type="submit" color="primary btn-block">Sign In</CButton>
+                                        <CButton type="submit" color="primary btn-block" v-if="!isLoading">
+                                            Sign In
+                                        </CButton>
+                                        <CButton
+                                            color="primary btn-block d-flex align-items-center gap-3 justify-content-center"
+                                            v-if="isLoading">
+                                            <CSpinner /> <span>Waiting...</span>
+                                        </CButton>
                                     </div>
                                 </CForm>
                             </div>
@@ -36,53 +43,53 @@
     </div>
 </template>
 
-<script setup>
-import { CFormInput, CButton, CForm } from "@coreui/vue";
-import { ref } from "vue";
-import { useStore } from "vuex";
+<script>
 import jsCookie from "js-cookie";
-import { useToast } from "vue-toast-notification";
-import "vue-toast-notification/dist/theme-sugar.css";
+import { CFormInput, CButton, CForm, CSpinner } from "@coreui/vue";
 
-const $store = useStore();
-const $toast = useToast();
-const isLoading = ref(false);
-const form = ref({
-    email: "",
-    password: "",
-});
-
-const errors = ref({});
-
-const handleSignIn = async () => {
-    isLoading.value = true;
-    errors.value = {};
-    try {
-        isLoading.value = false;
-        let response = await $store.dispatch("postData", [
-            "auth/login",
-            form.value,
-        ]);
-
-        jsCookie.set("baile", response.data.baile);
-        window.location.replace("/home");
-    } catch (error) {
-        isLoading.value = false;
-
-        if (error.response.status == $store.state.STATUS_CODE.VALIDATION) {
-            errors.value = error.response.data.messages;
+export default {
+    data() {
+        return {
+            isLoading: false,
+            form: {
+                email: "",
+                password: ""
+            },
+            errors: {}
         }
+    },
+    methods: {
+        async handleSignIn() {
+            this.errors = {}
+            this.isLoading = true
 
-        if (
-            [
-                $store.state.STATUS_CODE.BAD_REQUEST,
-                $store.state.STATUS_CODE.SERVER_ERROR,
-            ].includes(error.response.status)
-        ) {
-            $toast.error(error.response.data.messages, {
-                position: "top",
+            this.$store.dispatch("postData", [
+                "auth/login",
+                this.form,
+            ]).then((response) => {
+                this.isLoading = false
+                jsCookie.set("baile", response.data.baile);
+                window.location.replace("/home");
+            }).catch((error) => {
+                this.isLoading = false
+
+                if (error.response.status == this.$store.state.STATUS_CODE.VALIDATION) {
+                    this.errors = error.response.data.messages;
+                }
+
+                if (
+                    [
+                        this.$store.state.STATUS_CODE.BAD_REQUEST,
+                        this.$store.state.STATUS_CODE.SERVER_ERROR,
+                    ].includes(error.response.status)
+                ) {
+                    this.$toast.error(error.response.data.messages, {
+                        position: "top",
+                    });
+                }
             });
         }
-    }
-};
+    },
+    components: { CFormInput, CButton, CForm, CSpinner }
+}
 </script>

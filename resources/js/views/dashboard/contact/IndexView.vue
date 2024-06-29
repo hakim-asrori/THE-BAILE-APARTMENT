@@ -1,5 +1,6 @@
 <template>
     <CCard>
+        <CLoader v-if="isLoading" />
         <CCardBody>
             <div class="d-sm-flex align-items-center justify-content-between gap-3 mb-3">
                 <div>
@@ -65,88 +66,90 @@
     </CModal>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue';
-import { useStore } from "vuex";
-import { useToast } from 'vue-toast-notification';
+<script>
 import { CCard, CCardBody, CTable, CTableBody, CTableHead, CTableHeaderCell, CTableDataCell, CTableRow, CButton, CModal, CModalFooter, CModalBody, CModalHeader, CFormInput } from "@coreui/vue"
 import { Pagination } from "../../../components/dashboard"
+import { CLoader } from "../../../components"
 import util from '../../../store/services/util';
-import Swal from 'sweetalert2'
-import 'sweetalert2/dist/sweetalert2.css'
 
-const contacts = ref([])
-const pagination = ref([])
-const contactSelected = ref({})
-const showMessageModal = ref(false)
-const formPagination = ref({
-    per_page: 10,
-    page: 1,
-    search: ""
-})
-
-const $store = useStore()
-const $toast = useToast()
-
-onMounted(() => {
-    getContacts()
-})
-
-const getContacts = async () => {
-    try {
-        let response = await $store.dispatch("postData", ["contact/view", formPagination.value])
-        contacts.value = response.data
-        pagination.value = response.pagination
-    } catch (error) {
-        Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: error.response.data.messages,
-        });
-    }
-}
-
-const deleteContact = async (id) => {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
-    }).then(async (result) => {
-        if (result.isConfirmed) {
-            try {
-                await $store.dispatch("postData", ["contact/delete/" + id, {}])
-                getContacts()
-                Swal.fire({
-                    title: "Deleted!",
-                    text: "Your data has been deleted.",
-                    icon: "success"
-                });
-            } catch (error) {
-                $toast.error(error.response.data.messages, {
-                    position: "top",
-                });
-            }
+export default {
+    data() {
+        return {
+            formPagination: {
+                per_page: 10,
+                page: 1,
+                search: ""
+            },
+            pagination: [],
+            contacts: [],
+            contactSelected: {},
+            showMessageModal: false,
+            isLoading: false,
         }
-    });
-}
+    },
+    mounted() {
+        this.getContacts()
+    },
+    methods: {
+        getContacts() {
+            this.isLoading = true;
+            this.$store.dispatch("postData", ["contact/view", this.formPagination]).then((response) => {
+                this.isLoading = false;
+                this.contacts = response.data
+                this.pagination = response.pagination
+            }).catch((error) => {
+                this.isLoading = false;
+                this.$swal({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.response.data.messages,
+                });
+            });
+        },
 
-const onPageChange = (e) => {
-    formPagination.value.page = e
-    getContacts()
-}
+        deleteContact(id) {
+            this.$swal({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$store.dispatch("postData", ["contact/delete/" + id, {}]).then((response) => {
+                        this.getContacts()
+                        this.$swal({
+                            title: "Deleted!",
+                            text: "Your data has been deleted.",
+                            icon: "success"
+                        });
+                    }).catch((error) => {
+                        this.$toast.error(error.response.data.messages, {
+                            position: "top",
+                        });
+                    });
+                }
+            });
+        },
 
-const onSearch = () => {
-    getContacts()
-}
+        onPageChange(e) {
+            this.formPagination.page = e
+            this.getContacts()
+        },
 
-const convertDate = (date, time) => {
-    return util.convertDateTime(date, time)
-}
+        onSearch() {
+            this.getContacts()
+        },
 
-const iteration = (index) => {
-    return util.paginationIt(index, pagination.value)
+        convertDate(date, time) {
+            return util.convertDateTime(date, time)
+        },
+
+        iteration(index) {
+            return util.paginationIt(index, this.pagination)
+        },
+    },
+    components: { CCard, CCardBody, CTable, CTableBody, CTableHead, CTableHeaderCell, CTableDataCell, CTableRow, CButton, CModal, CModalFooter, CModalBody, CModalHeader, CFormInput, Pagination, CLoader }
 }
 </script>

@@ -4,6 +4,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContactController;
 use App\Http\Controllers\API\EnquireController;
 use App\Http\Controllers\API\FacilityController;
+use App\Http\Controllers\API\GalleryController;
 use App\Http\Controllers\API\RoomController;
 use App\Http\Controllers\API\RoomFeatureController;
 use App\Http\Controllers\API\RoomImageController;
@@ -32,10 +33,17 @@ Route::prefix('v1')->group(function () {
         Route::post('/enquire/store', [EnquireController::class, 'store']);
         Route::post('/facility/view', [FacilityController::class, 'view']);
         Route::post('/room/view', [RoomController::class, 'view']);
+        Route::post('/gallery/view', [GalleryController::class, 'view']);
     });
 
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/subscription/view', [SubscriptionController::class, 'view']);
+
+        Route::prefix('/gallery')->group(function () {
+            Route::post('/view', [GalleryController::class, 'view']);
+            Route::post('/store', [GalleryController::class, 'store']);
+            Route::post('/delete/{id}', [GalleryController::class, 'delete']);
+        });
 
         Route::prefix('/contact')->group(function () {
             Route::post('/view', [ContactController::class, 'view']);

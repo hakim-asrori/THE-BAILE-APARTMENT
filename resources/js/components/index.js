@@ -1,1 +1,1 @@
-// export { default as FileVueName } from "./FileVueName.vue";
+export { default as CLoader } from "./CLoader.vue";

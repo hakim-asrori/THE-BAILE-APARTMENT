@@ -47,7 +47,6 @@
 import jsCookie from "js-cookie";
 import { CFormInput, CButton, CForm, CSpinner } from "@coreui/vue";
 
-<<<<<<< HEAD
 export default {
     data() {
         return {
@@ -57,36 +56,6 @@ export default {
                 password: ""
             },
             errors: {}
-=======
-const $store = useStore();
-const $toast = useToast();
-const isLoading = ref(false);
-const form = ref({
-    email: "",
-    password: "",
-});
-
-const errors = ref({});
-
-const handleSignIn = async () => {
-    isLoading.value = true;
-    errors.value = {};
-    try {
-        isLoading.value = false;
-        let response = await $store.dispatch("postData", [
-            "auth/login",
-            form.value,
-        ]);
-
-        jsCookie.set("baile", response.data.baile);
-        window.location.replace("/home");
-    } catch (error) {
-        console.log(error);
-        isLoading.value = false;
-
-        if (error.response.status == $store.state.STATUS_CODE.VALIDATION) {
-            errors.value = error.response.data.messages;
->>>>>>> e25c2805c68abaa048ee6ec3c8f57a5f691bd63e
         }
     },
     methods: {

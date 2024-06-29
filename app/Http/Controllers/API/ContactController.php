@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\API;
 
 use App\Enums\ContactEnum;
+use App\Facades\LogFixer;
 use App\Facades\MessageFixer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\Contact\StoreRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -45,35 +47,49 @@ class ContactController extends Controller
      */
     public function view(Request $request)
     {
-        $query = $this->contact->query();
-        $query->selectRaw('id, name, email, phone, date, time, message, created_at');
+        try {
+            $query = $this->contact->query();
+            $query->selectRaw('id, name, email, phone, date, time, message, created_at');
 
-        if ($request->has('search')) {
-            $query->where(function ($query) use ($request) {
-                $query->where('name', 'like', "%$request->search%");
-                $query->orWhere('email', 'like', "%$request->search%");
-            });
+            if ($request->has('search')) {
+                $query->where(function ($query) use ($request) {
+                    $query->where('name', 'like', "%$request->search%");
+                    $query->orWhere('email', 'like', "%$request->search%");
+                    $query->orWhere('phone', 'like', "%$request->search%");
+                });
+            }
+
+            $query->whereType(ContactEnum::CONTACT);
+
+            $contacts = $query->paginate($request->per_page);
+
+            return MessageFixer::render([
+                "code" => MessageFixer::HTTP_OK,
+                "status" => MessageFixer::SUCCESS,
+                "data" => $contacts->items(),
+                "pagination" => [
+                    "total" => $contacts->total(),
+                    "per_page" => $contacts->perPage(),
+                    "current_page" => $contacts->currentPage(),
+                    "last_page" => $contacts->lastPage(),
+                    "next_page_url" => $contacts->nextPageUrl(),
+                    "prev_page_url" => $contacts->previousPageUrl(),
+                    "from" => $contacts->firstItem(),
+                    "to" => $contacts->lastItem(),
+                ]
+            ]);
+        } catch (\Throwable $th) {
+            LogFixer::error("CONTACT", json_encode([
+                "HEAD" => [
+                    "host" => $request->header('host'),
+                    "accept" => $request->header('accept'),
+                    "content-type" => $request->header('content-type'),
+                ],
+                "BODY" => $request->all(),
+                "RESP" => $th->getMessage()
+            ]));
+            return MessageFixer::error("Something went wrong!");
         }
-
-        $query->whereType(ContactEnum::CONTACT);
-
-        $contacts = $query->paginate($request->per_page);
-
-        return MessageFixer::render([
-            "code" => MessageFixer::HTTP_OK,
-            "status" => MessageFixer::SUCCESS,
-            "data" => $contacts->items(),
-            "pagination" => [
-                "total" => $contacts->total(),
-                "per_page" => $contacts->perPage(),
-                "current_page" => $contacts->currentPage(),
-                "last_page" => $contacts->lastPage(),
-                "next_page_url" => $contacts->nextPageUrl(),
-                "prev_page_url" => $contacts->previousPageUrl(),
-                "from" => $contacts->firstItem(),
-                "to" => $contacts->lastItem(),
-            ]
-        ]);
     }
 
     /**

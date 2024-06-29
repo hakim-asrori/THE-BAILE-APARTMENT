@@ -2,7 +2,7 @@ import { IndexView } from "../../../views/dashboard/room";
 
 export default [
     {
-        path: "/dashboard/room",
+        path: "/home/room",
         name: "room.index",
         component: IndexView,
         meta: {

@@ -2,7 +2,7 @@ import { IndexView } from "../../../views/dashboard/gallery";
 
 export default [
     {
-        path: "/dashboard/gallery",
+        path: "/home/gallery",
         name: "gallery.index",
         component: IndexView,
         meta: {

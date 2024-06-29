@@ -11,3 +11,14 @@
 .form-select[readonly] {
     background-color: #e9ecef !important;
 }
+
+.table thead th {
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+}
+
+.table th,
+.table td {
+    font-size: 16px !important;
+    padding: .5rem .5rem !important;
+}

@@ -2,7 +2,7 @@ import { IndexView, CreateView } from "../../../views/dashboard/facility";
 
 export default [
     {
-        path: "/dashboard/facility",
+        path: "/home/facility",
         name: "facility.index",
         component: IndexView,
         meta: {
@@ -10,7 +10,7 @@ export default [
         },
     },
     {
-        path: "/dashboard/facility/create",
+        path: "/home/facility/create",
         name: "facility.create",
         component: CreateView,
         meta: {

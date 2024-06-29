@@ -2,7 +2,7 @@ import { IndexView } from "../../../views/dashboard/enquire";
 
 export default [
     {
-        path: "/dashboard/enquire",
+        path: "/home/enquire",
         name: "enquire.index",
         component: IndexView,
         meta: {

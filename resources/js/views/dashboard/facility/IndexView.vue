@@ -2,7 +2,7 @@
     <CCard>
         <CCardHeader>
             <router-link
-                :to="{ name: 'facility.create' }"
+                :to="{ name: 'home.facility.create' }"
                 class="btn btn-primary btn-sm"
             >
                 <i class="fas fa-plus me-2"></i> Add New Facility

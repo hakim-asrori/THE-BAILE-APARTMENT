@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('facility_features', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->foreignIdFor(Facility::class)->references('id')->on('facilities');
             $table->string('icon', 50);
             $table->string('name', 50);

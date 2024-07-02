@@ -29,10 +29,12 @@ class RoomImageController extends Controller
         }
 
         try {
-            $this->roomImage->create([
-                'room_id' => $request->room_id,
-                'image' => $request->file('image')->store('rooms')
-            ]);
+            foreach ($request->file('images') as $image) {
+                $this->roomImage->create([
+                    'room_id' => $request->room_id,
+                    'image' => $image->store('rooms')
+                ]);
+            }
 
             DB::commit();
             return MessageFixer::created('room image has been added!');

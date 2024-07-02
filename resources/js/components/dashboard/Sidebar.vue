@@ -89,7 +89,7 @@
                 </li>
                 <li>
                     <router-link
-                        :to="{ name: 'facility.index' }"
+                        :to="{ name: 'home.facility.index' }"
                         class="ai-icon"
                         aria-expanded="false"
                         @click="changeTitleBar('Facilities')"
@@ -100,7 +100,7 @@
                 </li>
                 <li>
                     <router-link
-                        :to="{ name: 'room.index' }"
+                        :to="{ name: 'home.room.index' }"
                         class="ai-icon"
                         aria-expanded="false"
                         @click="changeTitleBar('Room Type')"
@@ -111,7 +111,7 @@
                 </li>
                 <li>
                     <router-link
-                        :to="{ name: 'gallery.index' }"
+                        :to="{ name: 'home.gallery.index' }"
                         class="ai-icon"
                         aria-expanded="false"
                         @click="changeTitleBar('Gallery')"
@@ -122,7 +122,7 @@
                 </li>
                 <li>
                     <router-link
-                        :to="{ name: 'contact.index' }"
+                        :to="{ name: 'home.contact.index' }"
                         class="ai-icon"
                         aria-expanded="false"
                         @click="changeTitleBar('Contact')"
@@ -133,7 +133,7 @@
                 </li>
                 <li>
                     <router-link
-                        :to="{ name: 'enquire.index' }"
+                        :to="{ name: 'home.enquire.index' }"
                         class="ai-icon"
                         aria-expanded="false"
                         @click="changeTitleBar('Enquire')"

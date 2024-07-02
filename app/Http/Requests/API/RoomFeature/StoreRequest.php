@@ -26,8 +26,9 @@ class StoreRequest extends FormRequest
     {
         return [
             'room_id' => 'required|exists:rooms,id',
-            'type' => 'required|in:1,2,3',
-            'name' => 'required|max:75',
+            'features' => 'required|array',
+            'features.*.type' => 'required|in:1,2,3',
+            'features.*.name' => 'required|max:75',
         ];
     }
 

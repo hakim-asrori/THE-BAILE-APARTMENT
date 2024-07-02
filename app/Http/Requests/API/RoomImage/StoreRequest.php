@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
     {
         return [
             'room_id' => 'required|exists:rooms,id',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:5120'
+            'images' => 'required|array|max:4',
+            'images.*' => 'image|mimes:png,jpg,jpeg|max:5120'
         ];
     }
 

@@ -82,7 +82,7 @@
             <CCardFooter class="justify-content-between d-flex">
                 <router-link
                     class="btn btn-secondary btn-sm"
-                    :to="{ name: 'facility.index' }"
+                    :to="{ name: 'home.facility.index' }"
                 >
                     <i class="fas fa-chevron-left me-2"></i> Back
                 </router-link>
@@ -94,7 +94,7 @@
     </CForm>
 </template>
 
-<script setup>
+<!-- <script setup>
 import {
     CCard,
     CCardBody,
@@ -183,6 +183,122 @@ const handleSubmit = async () => {
         console.log(response);
     } catch (error) {
         console.log(error.response);
+    }
+};
+</script> -->
+<script>
+import {
+    CCard,
+    CCardBody,
+    CCardFooter,
+    CButton,
+    CRow,
+    CCol,
+    CFormTextarea,
+    CFormInput,
+    CForm,
+    CFormLabel,
+    CTable,
+    CTableBody,
+    CTableDataCell,
+    CTableHead,
+    CTableHeaderCell,
+    CTableRow,
+    CTableFoot,
+} from "@coreui/vue";
+import { useStore } from "vuex";
+import { ref } from "vue";
+
+export default {
+    components: {
+        CCard,
+        CCardBody,
+        CCardFooter,
+        CButton,
+        CRow,
+        CCol,
+        CFormTextarea,
+        CFormInput,
+        CForm,
+        CFormLabel,
+        CTable,
+        CTableBody,
+        CTableDataCell,
+        CTableHead,
+        CTableHeaderCell,
+        CTableRow,
+        CTableFoot,
+    },
+    data() {
+        return {
+            form: {
+                title: "",
+                image: null,
+                description: "",
+                features: "",
+            },
+            previewThumbnail: null,
+            counter: 0,
+        };
+    },
+    mounted() {
+        this.initDuplicateFeature()
+    },
+    methods: {
+        uploadThumbnail(event) {
+            const file = event.target.files[0];
+            if (file && file.type.startsWith("image/")) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.previewThumbnail = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        },
+        initDuplicateFeature() {
+            this.counter = $(".duplicate:last").data("id") || 0;
+            $("#double-" + this.counter)
+                .find("button")
+                .hide();
+        },
+        duplicateFeature() {
+            var editElm;
+            this.counter++;
+
+            $(".duplicate:last")
+                .clone(true)
+                .map(function () {
+                    editElm = $(this)
+                        .attr("id", `double-${this.counter}`)
+                        .attr("data-id", this.counter);
+                }.bind(this));
+            if ($("#double-" + (this.counter - 1)).length) {
+                $("#double-" + (this.counter - 1)).after(editElm);
+            } else {
+                $("#double-0").after(editElm);
+            }
+
+            $(".duplicate").find("button").show();
+            $("#double-" + this.counter)
+                .find("button")
+                .hide();
+        },
+        removeFeature() {
+            $(".remove-feature").on("click", function () {
+                $(this).parents(".duplicate").remove();
+            });
+        },
+        async handleSubmit() {
+            try {
+                let response = await this.$store.dispatch("postData", [
+                    "facility/store",
+                    {},
+                ]);
+                console.log(response);
+            } catch (error) {
+                console.log(error.response);
+            }
+        }
     }
 };
 </script>

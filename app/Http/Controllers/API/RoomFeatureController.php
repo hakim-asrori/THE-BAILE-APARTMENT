@@ -23,7 +23,15 @@ class RoomFeatureController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->roomFeature->create($request->all());
+            $this->roomFeature->where('room_id', $request->room_id)->delete();
+
+            foreach ($request->features as $key => $feature) {
+                $this->roomFeature->create([
+                    'room_id' => $request->room_id,
+                    'type' => $feature['type'],
+                    'name' => $feature['name'],
+                ]);
+            }
 
             DB::commit();
             return MessageFixer::created('room feature has been added!');

@@ -10,6 +10,7 @@ use App\Http\Requests\API\Room\UpdateRequest;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
@@ -107,7 +108,7 @@ class RoomController extends Controller
             $data['images'][$i] = $image;
         }
 
-        return $data;
+        return MessageFixer::success("", $data);
     }
 
     public function update(UpdateRequest $request, $id)
@@ -124,6 +125,33 @@ class RoomController extends Controller
 
             DB::commit();
             return MessageFixer::success('room has been updated!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return MessageFixer::error($th->getMessage());
+        }
+    }
+
+    public function delete($id)
+    {
+        DB::beginTransaction();
+
+        $room = $this->room->selectRaw('id')->find($id);
+        if (!$room) {
+            return MessageFixer::warning("data not found!", MessageFixer::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $room->features()->delete();
+
+            foreach ($room->images as $image) {
+                Storage::delete(str_replace(asset('storage') . '/', '', $image->image));
+                $image->delete();
+            }
+
+            $room->delete();
+
+            DB::commit();
+            return MessageFixer::created('room has been added!');
         } catch (\Throwable $th) {
             DB::rollBack();
             return MessageFixer::error($th->getMessage());

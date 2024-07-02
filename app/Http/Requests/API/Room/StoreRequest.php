@@ -37,10 +37,33 @@ class StoreRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
+        $errors = $validator->errors()->toArray();
+
+        $reformattedErrors = [
+            'title' => $errors['title'] ?? [],
+            'description' => $errors['description'] ?? [],
+            'images' => $errors['images'] ?? [],
+            'features' => [],
+        ];
+
+        foreach ($errors as $key => $messages) {
+            if (strpos($key, 'features.') === 0) {
+                preg_match('/features\.(\d+)\.(type|name)/', $key, $matches);
+                $index = $matches[1];
+                $field = $matches[2];
+
+                if (!isset($reformattedErrors['features'][$index])) {
+                    $reformattedErrors['features'][$index] = [];
+                }
+
+                $reformattedErrors['features'][$index][$field] = $messages;
+            }
+        }
+
         $response = new MessageFixer([
             'code' => MessageFixer::HTTP_UNPROCESSABLE_ENTITY,
             'status' => MessageFixer::WARNING,
-            'messages' => $validator->errors(),
+            'messages' => $reformattedErrors,
         ], MessageFixer::HTTP_UNPROCESSABLE_ENTITY);
 
         throw new ValidationException($validator, $response);

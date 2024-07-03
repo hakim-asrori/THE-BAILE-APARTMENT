@@ -1,11 +1,12 @@
 <template>
     <div class="h-full carousel carousel-vertical w-full bg-[#E7E6D4]">
         <div class="carousel-item h-full">
-            <video class="responsive-video" autoplay loop muted>
-                <source src="../../../videos/vid-1.mp4" type="video/mp4" />
+            <video class="h-full w-full object-cover" autoplay loop muted>
+                <source src="../../../videos/vid-1.mp4" type="video/mp4" media="(min-width: 768px)" />
+                Your browser does not support the video tag.
+                <source src="../../../videos/vid-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
                 Your browser does not support the video tag.
             </video>
-            <!-- <img src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg" /> -->
         </div>
         <div class="carousel-item h-full pl-8 pt-5 flex flex-col">
             <u class="text-4xl text-[#5F3F2F] font-spectral"
@@ -33,14 +34,15 @@
                     <div
                         class="flex justify-center items-end flex-grow w-full h-auto"
                     >
-                        <div
+                        <a
                             class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-3xl flex justify-between items-center cursor-pointer"
+                            href="https://maps.app.goo.gl/hY3fBpur9H4qDWjZ8" target="_blank"
                         >
                             <p class="font-sans text-white pl-2">
                                 VIEW ON GOOGLE MAPS
                             </p>
                             <i class="maps-ic pr-2"></i>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="max-w-[25vw] h-full hidden md:block">
@@ -115,6 +117,7 @@ const backgroundSvg = {
 </svg>
 ')`,
 };
+
 </script>
 
 <style scoped>

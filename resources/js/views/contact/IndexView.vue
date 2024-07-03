@@ -32,7 +32,8 @@
                     ></iframe>
                 </div>
                 <div class="mt-5">
-                    <div
+                    <a
+                        href="https://maps.app.goo.gl/hY3fBpur9H4qDWjZ8" target="_blank"
                         class="flex border border-primaryColor w-auto justify-center rounded-lg"
                     >
                         <button
@@ -41,7 +42,7 @@
                             O P E N &nbsp; I N &nbsp; G O O G L E &nbsp; M A P S
                         </button>
                         <i class="maps-ic"></i>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="w-full">

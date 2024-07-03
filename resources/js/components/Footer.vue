@@ -8,6 +8,7 @@
         </p>
         <p class="mt-2"><b>PHONE</b> &nbsp;: (+62) 857-1810-1985</p>
         <p><b>PHONE</b> &nbsp;: (+62) 813-8707-6706</p>
+        <p><b>PHONE</b> &nbsp;: (+62) 821-2927-4019</p>
         <p class="mt-2">
           <b>EMAIL</b> &nbsp; &nbsp;: thebaileapartment@gmail.com
         </p>

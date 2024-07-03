@@ -2,7 +2,7 @@
     <div class="relative">
         <button
             @click="toggleSidebar"
-            class="lg:hidden p-2 fixed top-5 left-5 z-50 bg-brown-700 rounded-md text-white"
+            class="fixed top-5 left-5 z-50 p-2 text-white rounded-md lg:hidden bg-brown-700"
         >
             ☰
         </button>
@@ -19,14 +19,14 @@
                 { '-translate-x-full': !isSidebarOpen, 'lg:translate-x-0': true }
             ]"
         >
-            <div class="flex flex-col logo mb-10 items-center">
+            <div class="flex flex-col items-center mb-10 logo">
                 <div class="flex justify-center">
                     <img src="../../images/logo.png" alt="LOGO" class="w-32 h-auto" />
                 </div>
-                <p class="text-sm mt-4">Welcome To Baile Apartment</p>
+                <p class="mt-4 text-sm">Welcome To The Baile Apartment</p>
             </div>
             <nav>
-                <ul class="list-none pr-5 pl-5">
+                <ul class="pr-5 pl-5 list-none">
                     <li class="my-5">
                         <router-link
                             to="/"
@@ -36,7 +36,7 @@
                                 'bg-[#BF9B44]': $route.path === '/',
                             }"
                         >
-                            <i class="icon-home mr-2"></i> H O M E
+                            <i class="mr-2 icon-home"></i> H O M E
                         </router-link>
                     </li>
                     <li class="my-5">
@@ -48,7 +48,7 @@
                                 'bg-[#BF9B44]': $route.path === '/facilities',
                             }"
                         >
-                            <i class="icon-facilities mr-2"></i> F A C I L I T I E S
+                            <i class="mr-2 icon-facilities"></i> F A C I L I T I E S
                         </router-link>
                     </li>
                     <li class="my-5">
@@ -60,7 +60,7 @@
                                 'bg-[#BF9B44]': $route.path === '/room-type',
                             }"
                         >
-                            <i class="icon-room-type mr-2"></i> R O O M  T Y P E
+                            <i class="mr-2 icon-room-type"></i> R O O M  T Y P E
                         </router-link>
                     </li>
                     <li class="my-5">
@@ -72,7 +72,7 @@
                                 'bg-[#BF9B44]': $route.path === '/gallery',
                             }"
                         >
-                            <i class="icon-gallery mr-2"></i> G A L L E R Y
+                            <i class="mr-2 icon-gallery"></i> G A L L E R Y
                         </router-link>
                     </li>
                     <li class="my-5">
@@ -84,7 +84,7 @@
                                 'bg-[#BF9B44]': $route.path === '/contact',
                             }"
                         >
-                            <i class="icon-contact mr-2"></i> C O N T A C T
+                            <i class="mr-2 icon-contact"></i> C O N T A C T
                         </router-link>
                     </li>
                     <li class="my-5">
@@ -96,14 +96,14 @@
                                 'bg-[#BF9B44]': $route.path === '/enquire',
                             }"
                         >
-                            <i class="icon-enquire mr-2"></i> E N Q U I R E N O W
+                            <i class="mr-2 icon-enquire"></i> E N Q U I R E N O W
                         </router-link>
                     </li>
                 </ul>
             </nav>
 
-            <div class="mt-24 flex justify-center">
-                <p class="text-sm font-sans font-normal">
+            <div class="flex justify-center mt-24">
+                <p class="font-sans text-sm font-normal">
                     &copy; Copyright The Baile 2024
                 </p>
             </div>

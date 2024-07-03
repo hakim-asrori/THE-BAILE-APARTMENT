@@ -14,6 +14,7 @@
                         </p>
                         <p>(+62) 857-1810-1985</p>
                         <p>(+62) 813-8707-6706</p>
+                        <p>(+62) 821-2927-4019</p>
                     </div>
                     <div class="flex flex-col w-1/2">
                         <p class="font-spectral text-primaryColor">

@@ -59,7 +59,7 @@
                                 <ol class="list-disc">
                                     <li>Walking Distance to RSCM & FK UI</li>
                                     <li>
-                                        0 Min Drive from Bundaran HI, Plaza
+                                        10 Min Drive from Bundaran HI, Plaza
                                         Indonesia and Grand Indonesia Shopping
                                         Town
                                     </li>

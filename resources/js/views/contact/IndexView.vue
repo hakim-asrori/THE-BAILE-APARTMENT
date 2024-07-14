@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full carousel carousel-vertical w-full">
+    <div class="h-full w-full">
         <div class="flex flex-col sm:flex-row gap-3 m-4 pt-4">
             <!-- Bagian Kontak -->
             <div class="w-full sm:w-1/2">
@@ -62,6 +62,7 @@
                             type="text"
                             id="fullname"
                             class="custom-input"
+                            v-model="formData.name"
                             placeholder="FULL NAME"
                         />
                     </div>
@@ -71,6 +72,7 @@
                             type="email"
                             id="email"
                             class="custom-input"
+                            v-model="formData.email"
                             placeholder="EMAIL"
                         />
                     </div>
@@ -82,6 +84,7 @@
                             type="tel"
                             id="phone"
                             class="custom-input"
+                            v-model="formData.phone"
                             placeholder="PHONE NUMBER"
                         />
                     </div>
@@ -91,6 +94,7 @@
                             type="datetime-local"
                             id="date"
                             class="custom-input"
+                            v-model="formData.date"
                             placeholder="PICK A DATE"
                         />
                     </div>
@@ -98,7 +102,12 @@
                         <label for="message" class="custom-label"
                             >MESSAGE</label
                         >
-                        <textarea id="message" class="custom-input h-40">
+                        <textarea
+                            id="message"
+                            class="custom-input h-40"
+                            placeholder="Leave a message"
+                            v-model="formData.message"
+                        >
 Message</textarea
                         >
                     </div>
@@ -108,6 +117,7 @@ Message</textarea
                         >
                             <button
                                 class="text-primaryColor font-sans text-md p-2 rounded-md pr-5"
+                                @click="handleSubmit()"
                             >
                                 S U B M I T
                             </button>
@@ -138,6 +148,71 @@ Message</textarea
 
 <script setup>
 import Footer from "../../components/Footer.vue";
+import { ref } from "vue";
+import store from "../../store";
+import dayjs from "dayjs";
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
+
+const $toast = useToast();
+
+const formData = ref({
+    name: "",
+    email: "",
+    phone: "",
+    date: dayjs().format("YYYY-MM-DDTHH:mm"),
+    timeRef: ref(""),
+    message: "",
+});
+
+const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(email).toLowerCase());
+};
+
+const validatePhone = (phone) => {
+    const re = /^\d{10}$/;
+    return re.test(String(phone));
+};
+
+const handleSubmit = async () => {
+    if (!validateEmail(formData.value.email)) {
+        return $toast.warning("Invalid Email !", {
+            position: "top-right",
+        });
+    }
+
+    if (!validatePhone(formData.value.phone)) {
+        return $toast.warning("Invalid Phone Number !", {
+            position: "top-right",
+        });
+    }
+
+    const formattedDate = dayjs(formData.value.date).format(
+        "YYYY-MM-DD HH:mm:ss"
+    );
+    const time = formattedDate.split(" ")[1];
+    formData.timeRef.value = time;
+
+    console.log("Formatted Data:", formData.value);
+
+    try {
+        const response = await store.dispatch("postData", [
+            "public/contact/store",
+            formData.value,
+        ]);
+
+        if (response.code === 201 || response.code === 200) {
+            $toast.success("Success To Subscribe!", {
+                position: "top-right",
+            });
+        }
+    } catch (error) {
+        $toast.error(`${error}`, {
+            position: "top-right",
+        });
+    }
+};
 </script>
 
 <style scoped>

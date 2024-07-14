@@ -62,11 +62,11 @@
                     <input
                         type="text"
                         class="bg-transparent border-b-2 border-black p-2 mr-5 flex-grow"
-                        name=""
-                        id=""
+                        v-model="email"
                     />
                     <div
                         class="border border-[#5F3F2F] rounded-3xl pt-2 w-28 flex justify-center cursor-pointer"
+                        @click="handleSubmit()"
                     >
                         SUBSCRIBE
                     </div>
@@ -96,6 +96,45 @@
     </div>
 </template>
 
+<script setup>
+import { ref } from "vue";
+import store from "../store";
+
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
+import { validateEmail } from "../helpers/validate";
+const $toast = useToast();
+
+const email = ref("");
+
+const handleSubmit = async () => {
+    const isValidEmail = validateEmail(email.value);
+
+    if (!isValidEmail) {
+        return $toast.warning("Invalid Email !", {
+            position: "top-right",
+        });
+    }
+
+    try {
+        const response = await store.dispatch("postData", [
+            "public/subscription/store",
+            {
+                email: email.value,
+            },
+        ]);
+        if (response.code === 201 || response.code === 200) {
+            $toast.success("Success To Subscribe!", {
+                position: "top-right",
+            });
+        }
+    } catch (error) {
+        $toast.error(`${error}`, {
+            position: "top-right",
+        });
+    }
+};
+</script>
 <style scoped>
 .icon-instagram::before {
     content: url("../../icons/instagram_ic.svg");

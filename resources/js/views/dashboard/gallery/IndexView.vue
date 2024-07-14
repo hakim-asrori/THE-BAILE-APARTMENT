@@ -60,7 +60,7 @@
                     <CFormInput
                         type="file"
                         multiple
-                        accept="image/png, image/jpg, image/jpeg"
+                        accept="image/png, image/jpg, image/jpeg, image/webp"
                         ref="imageFile"
                         @change="handleUploadImages($event)"
                         class="mb-3"
@@ -277,7 +277,8 @@ export default {
                 if (
                     file.type == "image/jpeg" ||
                     file.type == "image/png" ||
-                    file.type == "image/jpg"
+                    file.type == "image/jpg" ||
+                    file.type == "image/webp"
                 ) {
                     const reader = new FileReader();
                     reader.onload = (e) => {
@@ -287,7 +288,7 @@ export default {
                     reader.readAsDataURL(file);
                 } else {
                     this.$toast.error(
-                        `File "${file.name}" must be a jpg, jpeg, or png image`,
+                        `File "${file.name}" must be a jpg, jpeg, webp or png image`,
                         {
                             position: "top",
                         }

@@ -1,6 +1,6 @@
 <template>
     <div class="h-full carousel carousel-vertical w-full">
-        <div class="carousel-item flex flex-col sm:flex-row gap-3 m-4 pt-4">
+        <div class="flex flex-col sm:flex-row gap-3 m-4 pt-4">
             <!-- Bagian Kontak -->
             <div class="w-full sm:w-1/2">
                 <p class="text-3xl font-spectral text-primaryColor">CONTACT</p>
@@ -117,7 +117,7 @@ Message</textarea
                 </div>
             </div>
         </div>
-        <div class="carousel-item">
+        <div class="">
             <div class="bg-[#BF8E44] h-full w-full">
                 <div class="p-6 flex justify-end mr-5">
                     <a
@@ -130,7 +130,7 @@ Message</textarea
                 </div>
             </div>
         </div>
-        <div class="carousel-item flex flex-col">
+        <div class="flex flex-col">
             <Footer />
         </div>
     </div>

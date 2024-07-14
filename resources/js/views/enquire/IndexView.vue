@@ -1,7 +1,7 @@
 <template>
     <div class="h-full carousel carousel-vertical w-full">
         <div class="m-4">
-            <div class="carousel-item flex flex-col p-5">
+            <div class="flex flex-col p-5">
                 <div class="grid grid-rows-3 grid-flow-col gap-4">
                     <div class="col-span-2 font-spectral text-xl text-primaryColor">
                         BOOK YOUR VISIT
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="carousel-item flex flex-col pt-5">
+        <div class="flex flex-col pt-5">
             <div class="bg-[#BF8E44] h-full">
                 <div class="p-6 flex justify-end mr-5">
                     <a class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg" href="/home">
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="carousel-item flex flex-col">
+        <div class="flex flex-col">
             <Footer/>
         </div>
     </div>

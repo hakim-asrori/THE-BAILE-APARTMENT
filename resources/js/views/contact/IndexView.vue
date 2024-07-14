@@ -1,14 +1,15 @@
 <template>
     <div class="h-full carousel carousel-vertical w-full">
-        <div class="carousel-item flex h-full gap-3 m-4 pt-4">
-            <div class="w-full">
+        <div class="carousel-item flex flex-col sm:flex-row gap-3 m-4 pt-4">
+            <!-- Bagian Kontak -->
+            <div class="w-full sm:w-1/2">
                 <p class="text-3xl font-spectral text-primaryColor">CONTACT</p>
                 <p class="text-md font-sans text-[#A2A2A2] pt-3">
                     Jl. Kimia No.4 10, RT.10/RW.1, Pegangsaan, Kec. Menteng,
                     Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10320
                 </p>
-                <div class="flex w-full pt-5">
-                    <div class="flex flex-col w-1/2">
+                <div class="flex w-full pt-5 gap-5">
+                    <div class="flex flex-col">
                         <p class="font-spectral text-primaryColor">
                             PHONE &nbsp;
                         </p>
@@ -16,7 +17,7 @@
                         <p>(+62) 813-8707-6706</p>
                         <p>(+62) 821-2927-4019</p>
                     </div>
-                    <div class="flex flex-col w-1/2">
+                    <div class="flex flex-col">
                         <p class="font-spectral text-primaryColor">
                             EMAIL &nbsp;
                         </p>
@@ -34,7 +35,8 @@
                 </div>
                 <div class="mt-5">
                     <a
-                        href="https://maps.app.goo.gl/hY3fBpur9H4qDWjZ8" target="_blank"
+                        href="https://maps.app.goo.gl/hY3fBpur9H4qDWjZ8"
+                        target="_blank"
                         class="flex border border-primaryColor w-auto justify-center rounded-lg"
                     >
                         <button
@@ -46,7 +48,8 @@
                     </a>
                 </div>
             </div>
-            <div class="w-full">
+            <!-- Bagian Formulir Input -->
+            <div class="w-full mt-5 sm:mt-0 sm:w-1/2">
                 <p class="text-2xl font-spectral text-primaryColor pt-10">
                     SCHEDULE A VISIT
                 </p>
@@ -92,9 +95,11 @@
                         />
                     </div>
                     <div class="">
-                        <label for="message" class="custom-label">DATE</label>
+                        <label for="message" class="custom-label"
+                            >MESSAGE</label
+                        >
                         <textarea id="message" class="custom-input h-40">
-Message </textarea
+Message</textarea
                         >
                     </div>
                     <div class="">
@@ -161,4 +166,6 @@ import Footer from "../../components/Footer.vue";
 .right-arrow-ic {
     content: url("../../../icons/right-arrow-ic.svg");
 }
+
+/* Penyesuaian untuk tampilan mobile */
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div class="relative overflow-y-auto">
         <button
             @click="toggleSidebar"
             class="fixed top-5 left-5 z-50 p-2 text-white rounded-md lg:hidden bg-brown-700"
@@ -141,7 +141,7 @@
                 </ul>
             </nav>
 
-            <div class="flex justify-center mt-24">
+            <div class="flex justify-center mt-10">
                 <p class="font-sans text-sm font-normal">
                     &copy; Copyright The Baile 2024
                 </p>

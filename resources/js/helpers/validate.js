@@ -4,7 +4,7 @@ const validateEmail = (email) => {
 };
 
 const validatePhone = (phone) => {
-    const re = /^\d{10}$/;
+    const re = /^\d{10,}$/;
     return re.test(String(phone));
 };
 

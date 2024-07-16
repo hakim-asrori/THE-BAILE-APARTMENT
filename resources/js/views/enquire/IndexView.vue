@@ -3,7 +3,9 @@
         <div class="m-4">
             <div class="flex flex-col p-5">
                 <div class="grid grid-rows-3 grid-flow-col gap-4">
-                    <div class="col-span-2 font-spectral text-xl text-primaryColor">
+                    <div
+                        class="col-span-2 font-spectral text-xl text-primaryColor"
+                    >
                         BOOK YOUR VISIT
                     </div>
                     <div class="row-span-2 col-span-2 text-[#A2A2A2]">
@@ -16,28 +18,37 @@
                 <div class="flex flex-col w-full">
                     <div class="flex flex-col sm:flex-row sm:flex-wrap w-full">
                         <div class="flex flex-col m-2 w-full sm:w-[30vw]">
-                            <label for="fullname" class="custom-label">FULL NAME</label>
+                            <label for="fullname" class="custom-label"
+                                >FULL NAME</label
+                            >
                             <input
                                 type="text"
                                 id="fullname"
+                                v-model="formData.name"
                                 class="custom-input"
                                 placeholder="FULL NAME"
                             />
                         </div>
                         <div class="flex flex-col m-2 w-full sm:w-[30vw]">
-                            <label for="email" class="custom-label">EMAIL</label>
+                            <label for="email" class="custom-label"
+                                >EMAIL</label
+                            >
                             <input
                                 type="email"
                                 id="email"
+                                v-model="formData.email"
                                 class="custom-input"
                                 placeholder="EMAIL"
                             />
                         </div>
                         <div class="flex flex-col m-2 w-full sm:w-[30vw]">
-                            <label for="phone" class="custom-label">PHONE NUMBER</label>
+                            <label for="phone" class="custom-label"
+                                >PHONE NUMBER</label
+                            >
                             <input
                                 type="tel"
                                 id="phone"
+                                v-model="formData.phone"
                                 class="custom-input"
                                 placeholder="PHONE NUMBER"
                             />
@@ -48,22 +59,40 @@
                                 type="datetime-local"
                                 id="date"
                                 class="custom-input"
+                                v-model="formData.date"
                                 placeholder="PICK A DATE"
                             />
                         </div>
                         <div class="flex flex-col m-2 w-full sm:w-[30vw]">
-                            <label for="room" class="custom-label">ROOM TYPE</label>
-                            <select id="room" class="custom-input">
-                                <option>PICK A ROOM TYPE</option>
+                            <label for="room" class="custom-label"
+                                >ROOM TYPE</label
+                            >
+                            <select
+                                id="room"
+                                class="custom-input"
+                                v-model="formData.room_id"
+                            >
+                                <option
+                                    v-for="room in roomType"
+                                    :key="room.id"
+                                    :value="room.id"
+                                >
+                                    {{ room.name }}
+                                </option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="m-2">
-                    <div class="flex border border-primaryColor w-40 justify-center rounded-lg">
-                        <button class="text-primaryColor font-sans text-md p-2 rounded-md pr-5">
+                    <div
+                        class="flex border border-primaryColor w-40 justify-center rounded-lg"
+                        @click="handleSubmit()"
+                    >
+                        <div
+                            class="text-primaryColor font-sans text-md p-2 rounded-md pr-5"
+                        >
                             S U B M I T
-                        </button>
+                        </div>
                         <i class="right-arrow-ic-brown"></i>
                     </div>
                 </div>
@@ -72,7 +101,10 @@
         <div class="flex flex-col pt-5">
             <div class="bg-[#BF8E44] h-full">
                 <div class="p-6 flex justify-end mr-5">
-                    <a class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg" href="/home">
+                    <a
+                        class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
+                        href="/home"
+                    >
                         <p class="pr-2">Home</p>
                         <i class="right-arrow-ic"></i>
                     </a>
@@ -80,7 +112,7 @@
             </div>
         </div>
         <div class="flex flex-col">
-            <Footer/>
+            <Footer />
         </div>
     </div>
 </template>
@@ -92,16 +124,108 @@ import store from "../../store";
 import dayjs from "dayjs";
 import { useToast } from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
+import { validatePhone, validateEmail } from "../../helpers/validate";
+
+const toast = useToast();
 
 const formData = ref({
     name: "",
     email: "",
     phone: "",
     date: dayjs().format("YYYY-MM-DDTHH:mm"),
-    timeRef: ref(""),
-    message: "",
+    time: ref(""),
+    room_id: null,
 });
 
+onMounted(() => {
+    fetchRoomType();
+});
+
+const roomType = ref([]);
+
+const fetchRoomType = async () => {
+    try {
+        const response = await store.dispatch("postData", [
+            "public/room/view",
+            formData.value,
+        ]);
+
+        const datas = response.data.map((data) => {
+            return {
+                id: data.id,
+                name: data.title,
+            };
+        });
+
+        datas.unshift({
+            id: null,
+            name: "PICK A ROOM TYPE",
+        });
+
+        roomType.value = datas;
+
+        console.log(roomType.value);
+    } catch (error) {
+        toast.error("Something Wrong");
+    }
+};
+
+const handleSubmit = async () => {
+    const isValidEmail = validateEmail(formData.value.email);
+    const isValidPhone = validatePhone(formData.value.phone);
+
+    if (!isValidEmail) {
+        return toast.warning("Invalid Email !", {
+            position: "top-right",
+        });
+    }
+
+    if (!isValidPhone) {
+        return toast.warning("Invalid Phone !", {
+            position: "top-right",
+        });
+    }
+
+    if (formData.value.room_id === null) {
+        return toast.warning("Please Pick A Room Type !", {
+            position: "top-right",
+        });
+    }
+
+    const formattedDate = dayjs(formData.value.date).format(
+        "YYYY-MM-DD HH:mm:ss"
+    );
+    const time = formattedDate.split(" ")[1];
+    formData.value.time = time;
+
+    try {
+        const response = await store.dispatch("postData", [
+            "public/enquire/store",
+            formData.value,
+        ]);
+        if (response.code === 201 || response.code === 200) {
+            toast.success("Success To Enquire!", {
+                position: "top-right",
+            });
+            resetForm();
+        }
+    } catch (error) {
+        toast.error(`${error}`, {
+            position: "top-right",
+        });
+    }
+};
+
+const resetForm = () => {
+    formData.value = {
+        name: "",
+        email: "",
+        phone: "",
+        room_id: null,
+        date: "",
+        time: "",
+    };
+};
 </script>
 
 <style scoped>

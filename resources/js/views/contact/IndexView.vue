@@ -153,6 +153,7 @@ import store from "../../store";
 import dayjs from "dayjs";
 import { useToast } from "vue-toast-notification";
 import "vue-toast-notification/dist/theme-sugar.css";
+import { validatePhone, validateEmail } from "../../helpers/validate";
 
 const $toast = useToast();
 
@@ -161,29 +162,22 @@ const formData = ref({
     email: "",
     phone: "",
     date: dayjs().format("YYYY-MM-DDTHH:mm"),
-    timeRef: ref(""),
+    time: ref(""),
     message: "",
 });
 
-const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-};
-
-const validatePhone = (phone) => {
-    const re = /^\d{10}$/;
-    return re.test(String(phone));
-};
-
 const handleSubmit = async () => {
-    if (!validateEmail(formData.value.email)) {
+    const isValidPhone = validatePhone(formData.value.phone);
+    const isValidEmail = validateEmail(formData.value.email);
+
+    if (!isValidEmail) {
         return $toast.warning("Invalid Email !", {
             position: "top-right",
         });
     }
 
-    if (!validatePhone(formData.value.phone)) {
-        return $toast.warning("Invalid Phone Number !", {
+    if (!isValidPhone) {
+        return $toast.warning("Invalid Phone !", {
             position: "top-right",
         });
     }
@@ -192,7 +186,7 @@ const handleSubmit = async () => {
         "YYYY-MM-DD HH:mm:ss"
     );
     const time = formattedDate.split(" ")[1];
-    formData.timeRef.value = time;
+    formData.value.time = time;
 
     console.log("Formatted Data:", formData.value);
 
@@ -203,15 +197,27 @@ const handleSubmit = async () => {
         ]);
 
         if (response.code === 201 || response.code === 200) {
-            $toast.success("Success To Subscribe!", {
+            $toast.success("Success Send Data Contact!", {
                 position: "top-right",
             });
+            resetForm();
         }
     } catch (error) {
         $toast.error(`${error}`, {
             position: "top-right",
         });
     }
+};
+
+const resetForm = () => {
+    formData.value = {
+        name: "",
+        email: "",
+        phone: "",
+        date: "",
+        time: "",
+        message: "",
+    };
 };
 </script>
 

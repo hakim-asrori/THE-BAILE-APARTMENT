@@ -44,16 +44,10 @@
                 <div class="w-full lg:w-1/2 h-full lg:p-7 p-2 flex flex-col lg:gap-10 gap-3 ">
                     <div>
                         <p class="lg:text-3xl text-xl font-spectral text-primaryColor ">
-                            LOFT
+                            {{data?.title ?? "None"}}
                         </p>
                         <p class="font-sans text-primaryColor lg:pt-5 pt-2 lg:text-base text-xs">
-                            Anda akan menikmati kenyamanan tempat tidur
-                            king-size, area kerja yang luas, serta pemandangan
-                            indah dari jendela besar. Kamar ini juga dilengkapi
-                            dengan kamar mandi pribadi yang modern, lengkap
-                            dengan bathtub dan shower terpisah dan pengalaman
-                            menginap Anda di Deluxe Suite akan menjadi tak
-                            terlupakan
+                            {{data?.description ?? "None"}}
                         </p>
                     </div>
                     <div class="text-[#5b3a29] font-sans">
@@ -115,7 +109,6 @@
         <div class="flex flex-col">
             <Footer />
         </div>
-        <!-- end room type 3 -->
     </div>
 </template>
 
@@ -145,7 +138,6 @@ onUnmounted(() => {
 
 const toast = useToast();
 const roomTypeData = ref([]);
-
 const fetchData = async () => {
     try {
         const response = await store.dispatch("postData", [
@@ -154,7 +146,8 @@ const fetchData = async () => {
         ]);
 
         roomTypeData.value = response.data;
-        console.log(roomTypeData.value);
+
+        console.log(JSON.stringify(roomTypeData.value,null,2));
     } catch (error) {
         toast.error("Something Wrong");
     }

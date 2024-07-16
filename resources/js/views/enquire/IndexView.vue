@@ -87,6 +87,21 @@
 
 <script setup>
 import Footer from "../../components/Footer.vue";
+import { onMounted, ref } from "vue";
+import store from "../../store";
+import dayjs from "dayjs";
+import { useToast } from "vue-toast-notification";
+import "vue-toast-notification/dist/theme-sugar.css";
+
+const formData = ref({
+    name: "",
+    email: "",
+    phone: "",
+    date: dayjs().format("YYYY-MM-DDTHH:mm"),
+    timeRef: ref(""),
+    message: "",
+});
+
 </script>
 
 <style scoped>

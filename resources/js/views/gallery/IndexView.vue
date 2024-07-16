@@ -1,110 +1,61 @@
 <template>
-    <div class="h-full carousel carousel-vertical w-full">
-        <div class="carousel-item flex h-full">
-            <div class="w-full flex flex-col h-full">
-                <div class="w-auto h-full">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img1.jpg?raw=true"
-                        alt="Image"
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="w-auto h-full">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img1.jpg?raw=true"
-                        alt="Image"
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-            </div>
-            <div class="w-full h-full">
+   <div class="h-full w-full overflow-y-auto">
+        <div class="flex flex-wrap w-full h-full">
+            <div
+                class="lg:w-1/2 md:w-1/2 w-full h-1/2 bg-primaryColor"
+                v-for="(image, index) in galleries"
+                :key="index"
+            >
                 <img
-                    src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img10.jpg?raw=true"
+                    :src="image.imagePath"
                     alt=""
                     class="w-full h-full object-cover"
                 />
             </div>
-        </div>
-        <div class="carousel-item flex flex-col h-full">
-            <div class="w-full bg-black h-1/2">
-                <img
-                    src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img11.jpg?raw=true"
-                    alt=""
-                    class="w-full h-full object-cover"
-                />
-            </div>
-            <div class="flex h-1/2">
-                <div class="w-1/2 h-full bg-primaryColor">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img12.jpg?raw=true"
-                        alt=""
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="w-1/2 h-full bg-primaryColor">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img13.jpg?raw=true"
-                        alt=""
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item flex flex-col h-full">
-            <div class="flex h-1/2">
-                <div class="w-1/2 h-full bg-primaryColor">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img14.jpg?raw=true"
-                        alt=""
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="w-1/2 h-full bg-primaryColor">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img15.jpg?raw=true"
-                        alt=""
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-            </div>
-            <div class="flex h-1/2">
-                <div class="w-1/2 h-full bg-primaryColor">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img3.jpg?raw=true"
-                        alt=""
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-                <div class="w-1/2 h-full bg-primaryColor">
-                    <img
-                        src="https://github.com/dzikrifazahk/image-thebaile/blob/main/img4.jpg?raw=true"
-                        alt=""
-                        class="w-full h-full object-cover"
-                    />
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item flex flex-col">
-            <div class="bg-[#BF8E44] h-full">
-                <div class="p-6 flex justify-end mr-5">
-                    <a
-                        class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
-                        href="/contact"
-                    >
-                        <p class="pr-2">Contact</p>
-                        <i class="right-arrow-ic"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item flex flex-col">
-            <Footer />
         </div>
     </div>
+    <div class="flex flex-col">
+        <div class="bg-[#BF8E44] h-full">
+            <div class="p-6 flex justify-end mr-5">
+                <a
+                    class="text-[#2A4B2C] flex text-xl font-spectral cursor-pointer bg-[#CFCE9B] p-2 rounded-lg"
+                    href="/contact"
+                >
+                    <p class="pr-2">Contact</p>
+                    <i class="right-arrow-ic"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <Footer />
 </template>
 
 <script setup>
+import { onMounted, ref } from "vue";
 import Footer from "../../components/Footer.vue";
+import store from "../../store";
+import { useToast } from "vue-toast-notification";
+
+const toast = useToast();
+const galleries = ref([]);
+
+onMounted(() => {
+    fetchImage();
+});
+
+const fetchImage = async () => {
+    try {
+        const response = await store.dispatch("postData", [
+            "public/gallery/view",
+            {},
+        ]);
+
+        galleries.value = response.data;
+        console.log(galleries.value);
+    } catch (error) {
+        toast.error("Something Wrong");
+    }
+};
 </script>
 
 <style scoped>

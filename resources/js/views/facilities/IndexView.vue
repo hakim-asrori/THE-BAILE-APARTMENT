@@ -165,7 +165,6 @@
                 </div>
             </div>
         </div>
-
         <!-- end public kitchen -->
         <!-- swimming pool -->
         <div class="carousel-item h-full gap-2">

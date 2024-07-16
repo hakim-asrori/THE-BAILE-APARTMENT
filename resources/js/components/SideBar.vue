@@ -68,6 +68,7 @@
                                 'font-bold': $route.path === '/',
                                 'bg-[#BF9B44]': $route.path === '/',
                             }"
+                            @click="handleMenuItemClick"
                         >
                             <i class="mr-2 icon-home"></i> H O M E
                         </router-link>
@@ -80,9 +81,9 @@
                                 'font-bold': $route.path === '/facilities',
                                 'bg-[#BF9B44]': $route.path === '/facilities',
                             }"
+                            @click="handleMenuItemClick"
                         >
-                            <i class="mr-2 icon-facilities"></i> F A C I L I T I
-                            E S
+                            <i class="mr-2 icon-facilities"></i> F A C I L I T I E S
                         </router-link>
                     </li>
                     <li class="my-5">
@@ -93,6 +94,7 @@
                                 'font-bold': $route.path === '/room-type',
                                 'bg-[#BF9B44]': $route.path === '/room-type',
                             }"
+                            @click="handleMenuItemClick"
                         >
                             <i class="mr-2 icon-room-type"></i> R O O M T Y P E
                         </router-link>
@@ -105,6 +107,7 @@
                                 'font-bold': $route.path === '/gallery',
                                 'bg-[#BF9B44]': $route.path === '/gallery',
                             }"
+                            @click="handleMenuItemClick"
                         >
                             <i class="mr-2 icon-gallery"></i> G A L L E R Y
                         </router-link>
@@ -117,6 +120,7 @@
                                 'font-bold': $route.path === '/contact',
                                 'bg-[#BF9B44]': $route.path === '/contact',
                             }"
+                            @click="handleMenuItemClick"
                         >
                             <i class="mr-2 icon-contact"></i> C O N T A C T
                         </router-link>
@@ -129,9 +133,9 @@
                                 'font-bold': $route.path === '/enquire',
                                 'bg-[#BF9B44]': $route.path === '/enquire',
                             }"
+                            @click="handleMenuItemClick"
                         >
-                            <i class="mr-2 icon-enquire"></i> E N Q U I R E N O
-                            W
+                            <i class="mr-2 icon-enquire"></i> E N Q U I R E N O W
                         </router-link>
                     </li>
                 </ul>
@@ -148,11 +152,19 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const isSidebarOpen = ref(false);
+const router = useRouter();
 
 const toggleSidebar = () => {
     isSidebarOpen.value = !isSidebarOpen.value;
+};
+
+const handleMenuItemClick = (event) => {
+    if (window.innerWidth < 1024) { // Adjust the breakpoint as needed
+        isSidebarOpen.value = false;
+    }
 };
 </script>
 

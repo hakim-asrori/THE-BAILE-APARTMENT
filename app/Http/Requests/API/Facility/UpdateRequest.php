@@ -28,18 +28,35 @@ class UpdateRequest extends FormRequest
             "title" => "required|max:100",
             "description" => "required|max:255",
             "features" => "required|array",
-            "features.*.icon" => "required|max:20",
-            "features.*.name" => "required|max:50",
+            "features.*" => "required|max:50",
             "image" => "image|max:5120|mimes:png,jpg,jpeg",
         ];
     }
 
     public function failedValidation(Validator $validator)
     {
+        $errors = $validator->errors()->toArray();
+
+        $reformattedErrors = [
+            'title' => $errors['title'] ?? [],
+            'description' => $errors['description'] ?? [],
+            'image' => $errors['image'] ?? [],
+            'features' => [],
+        ];
+
+        foreach ($errors as $key => $messages) {
+            if (strpos($key, 'features.') === 0) {
+                preg_match('/features\.(\d+)/', $key, $matches);
+                $index = $matches[1];
+
+                $reformattedErrors['features'][$index] = $messages;
+            }
+        }
+
         $response = new MessageFixer([
             'code' => MessageFixer::HTTP_UNPROCESSABLE_ENTITY,
             'status' => MessageFixer::WARNING,
-            'messages' => $validator->errors(),
+            'messages' => $reformattedErrors,
         ], MessageFixer::HTTP_UNPROCESSABLE_ENTITY);
 
         throw new ValidationException($validator, $response);

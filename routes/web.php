@@ -6,7 +6,7 @@ Route::get('sign', function () {
     return view('auth');
 });
 
-Route::get('home/{any?}/{id?}/{test?}', function () {
+Route::get('home/{any?}/{id?}/{test?}/{coba?}', function () {
     return view('dashboard');
 });
 

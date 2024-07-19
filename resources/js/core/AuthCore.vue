@@ -10,7 +10,7 @@
                                     <img src="../../images/logo.png" alt="" style="height: 100px; width: 100px" />
                                 </div>
                                 <h4 class="text-center mb-4">
-                                    Sign in your account {{ isLoading }}
+                                    Sign in your account
                                 </h4>
                                 <CForm method="post" @submit.prevent="handleSignIn">
                                     <div class="mb-3">

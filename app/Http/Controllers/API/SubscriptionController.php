@@ -62,4 +62,24 @@ class SubscriptionController extends Controller
             return MessageFixer::error($th->getMessage());
         }
     }
+
+    public function delete($id)
+    {
+        DB::beginTransaction();
+
+        $subscription = $this->subscription->find($id);
+        if (!$subscription) {
+            return MessageFixer::warning("data not found!", MessageFixer::HTTP_NOT_FOUND);
+        }
+
+        try {
+            $subscription->delete();
+
+            DB::commit();
+            return MessageFixer::success('subscription has been deleted!');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return MessageFixer::error($th->getMessage());
+        }
+    }
 }

@@ -20,30 +20,6 @@ class FacilityController extends Controller
         $this->facility = $facility;
     }
 
-    /**
-     * @OA\Post(
-     *      path="/facility/view",
-     *      operationId="Facility View",
-     *      tags={"Facility"},
-     *      summary="Facility View",
-     *      description="Facility View",
-     *      @OA\Parameter(
-     *          description="Search (by name or email)",
-     *          in="query",
-     *          name="search",
-     *          required=false,
-     *          @OA\Schema(type="string"),
-     *      ),
-     *       @OA\Response(
-     *           response="200",
-     *           description="successfully!",
-     *      ),
-     *       @OA\Response(
-     *           response="500",
-     *           description="internal server error!",
-     *      ),
-     *  )
-     */
     public function view(Request $request)
     {
         $query = $this->facility->query();
@@ -61,8 +37,8 @@ class FacilityController extends Controller
         foreach ($facilities->items() as $key => $facility) {
             $data[$key] = $facility;
 
-            foreach ($facility->features()->selectRaw('icon, name')->get() as $i => $feature) {
-                $data[$key]['features'][$i] = $feature;
+            foreach ($facility->features()->selectRaw('name')->get() as $i => $feature) {
+                $data[$key]['features'][$i] = $feature->name;
             }
         }
 
@@ -83,65 +59,6 @@ class FacilityController extends Controller
         ]);
     }
 
-    /**
-     * @OA\Post(
-     *      path="/facility/store",
-     *      operationId="Facility Store",
-     *      tags={"Facility"},
-     *      summary="Facility Store",
-     *      description="Facility Store",
-     *      @OA\RequestBody(
-     *          required=true,
-     *         @OA\MediaType(
-     *             mediaType="multipart/form-data",
-     *             @OA\Schema(
-     *                 schema="Facility",
-     *                 title="store",
-     *                 @OA\Property(
-     *                     property="title",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="description",
-     *                     type="string"
-     *                 ),
-     *                 @OA\Property(
-     *                     property="features[]",
-     *                     type="array",
-     *                     @OA\Items(
-     *                         type="object",
-     *                         @OA\Property(
-     *                             property="icon",
-     *                             type="string",
-     *                         ),
-     *                         @OA\Property(
-     *                             property="name",
-     *                             type="string",
-     *                         )
-     *                     )
-     *                 ),
-     *                 @OA\Property(
-     *                     property="image",
-     *                     type="string",
-     *                     format="binary"
-     *                 ),
-     *             )
-     *         )
-     *      ),
-     *       @OA\Response(
-     *           response="201",
-     *           description="created!",
-     *      ),
-     *       @OA\Response(
-     *           response="422",
-     *           description="body validation!",
-     *      ),
-     *       @OA\Response(
-     *           response="500",
-     *           description="internal server error!",
-     *      ),
-     *  )
-     */
     public function store(StoreRequest $request)
     {
         DB::beginTransaction();
@@ -153,7 +70,10 @@ class FacilityController extends Controller
 
             $facility = $this->facility->create($request->except('image', 'features'));
             foreach ($request->features as $feature) {
-                $facility->features()->create($feature);
+                $facility->features()->create([
+                    "icon" => 1,
+                    "name" => $feature
+                ]);
             }
 
             DB::commit();
@@ -174,7 +94,7 @@ class FacilityController extends Controller
         $data = $facility;
 
         foreach ($facility->features()->selectRaw('icon, name')->get() as $i => $feature) {
-            $data['features'][$i] = $feature;
+            $data['features'][$i] = $feature->name;
         }
 
         return MessageFixer::success("", $data);
@@ -198,9 +118,12 @@ class FacilityController extends Controller
             }
 
             $facility->update($request->except('image', 'features'));
+            $facility->features()->delete();
             foreach ($request->features as $feature) {
-                $facility->features()->delete();
-                $facility->features()->create($feature);
+                $facility->features()->create([
+                    "icon" => 1,
+                    "name" => $feature
+                ]);
             }
 
             DB::commit();

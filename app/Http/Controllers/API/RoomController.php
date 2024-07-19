@@ -38,10 +38,21 @@ class RoomController extends Controller
         foreach ($rooms->items() as $key => $room) {
             $data[$key] = $room;
 
-            foreach ($room->features()->selectRaw('id, name, type as type_id')->get() as $i => $feature) {
-                $data[$key]['features'][$i] = $feature;
-                $data[$key]['features'][$i]['type_name'] = RoomFeatureEnum::show($feature->type_id);
-            }
+            // foreach ($room->features()->selectRaw('id, name, type as type_id')->get() as $i => $feature) {
+            //     $data[$key]['features'][$i] = $feature;
+            //     $data[$key]['features'][$i]['type_name'] = RoomFeatureEnum::show($feature->type_id);
+            // }
+            $features = $room->features()
+                ->selectRaw('id, name, type as type_id')
+                ->get();
+            $groupedFeatures = $features->groupBy('type_id')->map(function ($items) {
+                $result = [
+                    "category" => RoomFeatureEnum::show($items[0]->type_id),
+                    "items" => $items->pluck('name')->all()
+                ];
+                return $result;
+            });
+            $data[$key]['features'] = $groupedFeatures;
 
             foreach ($room->images()->selectRaw('id, image')->get() as $i => $image) {
                 $data[$key]['images'][$i] = $image;

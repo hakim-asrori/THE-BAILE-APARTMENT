@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\ContactController;
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\API\EnquireController;
 use App\Http\Controllers\API\FacilityController;
 use App\Http\Controllers\API\GalleryController;
@@ -37,7 +38,11 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::middleware(['auth:sanctum'])->group(function () {
-        Route::post('/subscription/view', [SubscriptionController::class, 'view']);
+        Route::post('/dashboard', [DashboardController::class, 'index']);
+        Route::prefix('/subscription')->group(function () {
+            Route::post('/view', [SubscriptionController::class, 'view']);
+            Route::post('/delete/{id}', [SubscriptionController::class, 'delete']);
+        });
 
         Route::prefix('/gallery')->group(function () {
             Route::post('/view', [GalleryController::class, 'view']);

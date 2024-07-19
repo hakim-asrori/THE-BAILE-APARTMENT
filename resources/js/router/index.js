@@ -19,13 +19,13 @@ router.beforeEach((to, form, next) => {
         }
     }
 
-    if (to.meta.requiresAuth == false) {
-        if (token) {
-            window.location.replace("/home");
-        } else {
-            next();
-        }
-    }
+    // if (to.meta.requiresAuth == false) {
+    //     if (token) {
+    //         window.location.replace("/home");
+    //     } else {
+    //         next();
+    //     }
+    // }
 
     next();
 });

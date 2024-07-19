@@ -2,7 +2,7 @@
     <CForm @submit.prevent="handleSubmit">
         <CCard>
             <CCardHeader>
-                <CCardTitle>Create new Facility</CCardTitle>
+                <CCardTitle>Edit Facility</CCardTitle>
             </CCardHeader>
             <CCardBody>
                 <CRow>
@@ -16,6 +16,9 @@
                         </div>
                         <div class="mb-3" v-if="previewThumbnail">
                             <img :src="previewThumbnail" height="150" width="150" />
+                        </div>
+                        <div class="mb-3" v-else>
+                            <img :src="facility.thumbnail" height="150" width="150" />
                         </div>
                         <div class="mb-3">
                             <CFormInput type="text" label="Title" v-model="form.title" :class="{
@@ -84,6 +87,7 @@ import { useStore } from "vuex";
 import { ref } from "vue";
 
 export default {
+    props: ["id"],
     components: {
         CCard,
         CCardHeader,
@@ -113,6 +117,7 @@ export default {
                 description: "",
                 features: [],
             },
+            facility: {},
             previewThumbnail: null,
             counter: 0,
             isLoading: false,
@@ -120,8 +125,30 @@ export default {
         };
     },
     mounted() {
+        this.getFacility()
     },
     methods: {
+        getFacility() {
+            this.isLoading = true
+
+            this.$store.dispatch("postData", [`facility/show/${this.id}`, {}]).then((response) => {
+                this.isLoading = false
+                this.facility = response.data
+                this.form.title = response.data.title
+                this.form.description = response.data.description
+                response.data.features.forEach(feature => {
+                    this.form.features.push(feature)
+                });
+            }).catch((error) => {
+                this.isLoading = false
+                this.$swal({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.response.data.messages,
+                });
+            });
+        },
+
         uploadThumbnail(event) {
             const file = event.target.files[0];
             this.form.image = file
@@ -149,14 +176,16 @@ export default {
 
             let formData = new FormData()
             formData.append("title", this.form.title)
-            formData.append("image", this.form.image)
+            if (this.form.image) {
+                formData.append("image", this.form.image)
+            }
             formData.append("description", this.form.description)
             for (let index = 0; index < this.form.features.length; index++) {
                 formData.append(`features[${index}]`, this.form.features[index])
             }
 
             this.$store.dispatch("postData", [
-                "facility/store",
+                "facility/update/" + this.id,
                 formData,
             ]).then((response) => {
                 this.$swal({

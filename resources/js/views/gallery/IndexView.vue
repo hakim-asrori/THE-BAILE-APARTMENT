@@ -72,7 +72,6 @@ const fetchImage = async () => {
         ]);
 
         galleries.value = response.data;
-        console.log(galleries.value);
     } catch (error) {
         toast.error("Something Wrong");
     }

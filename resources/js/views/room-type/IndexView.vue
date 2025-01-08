@@ -8,16 +8,16 @@
         >
             <div class="absolute inset-0 bg-gradient-to-tl p-10">
                 <div class="h-full relative">
-                    <div class="absolute lg:w-1/2 right-5 bottom-0 ">
-                        <div
-                            class="mb-10"
-                        >
+                    <div class="absolute lg:w-1/2 right-5 bottom-0">
+                        <div class="mb-10">
                             <h1
                                 class="font-spectral text-2xl text-white lg:text-right sm:text-center pb-10"
                             >
                                 THE BAILE ROOM TYPE
                             </h1>
-                            <h1 class="text-white font-thin p-2  lg:text-right sm:text-center">
+                            <h1
+                                class="text-white font-thin p-2 lg:text-right sm:text-center"
+                            >
                                 The Baile provides a variety of room types
                                 designed to meet your needs and preferences.
                                 Find your preferred room type at The Baile
@@ -30,10 +30,21 @@
         </div>
 
         <!-- room type 1 -->
-        <div class="flex gap-2 flex-col" v-for="(data, index) in roomTypeData" :key="index">
+        <div
+            class="flex gap-2 flex-col"
+            v-for="(data, index) in roomTypeData"
+            :key="index"
+        >
             <div class="flex flex-col lg:flex-row w-full">
-                <div class="flex flex-wrap w-full lg:w-1/2" v-if="index % 2 === 0 || (index % 2 === 1 && isMobile)">
-                    <div class="w-1/2 h-1/2" v-for="(dataImage, imagesIndex) in data.images" :key="imagesIndex">
+                <div
+                    class="flex flex-wrap w-full lg:w-1/2"
+                    v-if="index % 2 === 0 || (index % 2 === 1 && isMobile)"
+                >
+                    <div
+                        class="w-1/2 h-1/2"
+                        v-for="(dataImage, imagesIndex) in data.images"
+                        :key="imagesIndex"
+                    >
                         <img
                             :src="dataImage.image"
                             class="w-full h-full object-cover"
@@ -41,47 +52,54 @@
                         />
                     </div>
                 </div>
-                <div class="w-full lg:w-1/2 h-full lg:p-7 p-2 flex flex-col lg:gap-10 gap-3 ">
+                <div
+                    class="w-full lg:w-1/2 h-full lg:p-7 p-2 flex flex-col lg:gap-10 gap-3"
+                >
                     <div>
-                        <p class="lg:text-3xl text-xl font-spectral text-primaryColor ">
-                            {{data?.title ?? "None"}}
+                        <p
+                            class="lg:text-3xl text-xl font-spectral text-primaryColor"
+                        >
+                            {{ data?.title ?? "None" }}
                         </p>
-                        <p class="font-sans text-primaryColor lg:pt-5 pt-2 lg:text-base text-xs">
-                            {{data?.description ?? "None"}}
+                        <p
+                            class="font-sans text-primaryColor lg:pt-5 pt-2 lg:text-base text-xs"
+                        >
+                            {{ data?.description ?? "None" }}
                         </p>
                     </div>
                     <div class="text-[#5b3a29] font-sans">
-                        <div class="mb-4">
-                            <h2 class="font-bold lg:text-lg text-sm text-brown-800 mb-2">
-                                Features
+                        <div
+                            class="mb-4"
+                            v-for="(feature, indexFeature) in data.features"
+                            :key="indexFeature"
+                        >
+                            <h2
+                                class="font-bold lg:text-lg text-sm text-brown-800 mb-2"
+                            >
+                                {{ feature.category }}
                             </h2>
-                            <ul class="list-disc list-inside text-brown-600 lg:text-base text-sm">
-                                <li>Room size: 29 m²/312 ft²</li>
-                                <li>City view</li>
-                                <li>Non-smoking</li>
-                            </ul>
-                        </div>
-                        <div class="mb-4">
-                            <h2 class="font-bold lg:text-lg text-sm text-brown-800 mb-2">
-                                Bathroom and toiletries
-                            </h2>
-                            <ul class="list-disc list-inside text-brown-600 lg:text-base text-sm">
-                                <li>Shower</li>
-                                <li>Towels</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h2 class="font-bold lg:text-lg text-sm text-brown-800 mb-2">
-                                Entertainment
-                            </h2>
-                            <ul class="list-disc list-inside text-brown-600 lg:text-base text-sm">
-                                <li>Free Wi-Fi in all rooms!</li>
+                            <ul
+                                class="list-disc list-inside text-brown-600 lg:text-base text-sm"
+                            >
+                                <li
+                                    v-for="(item, indexItem) in feature.items"
+                                    :key="indexItem"
+                                >
+                                    {{ item }}
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-wrap w-full lg:w-1/2" v-if="index % 2 === 1 && !isMobile">
-                    <div class="w-1/2 h-1/2" v-for="(dataImage, imagesIndex) in data.images" :key="imagesIndex">
+                <div
+                    class="flex flex-wrap w-full lg:w-1/2"
+                    v-if="index % 2 === 1 && !isMobile"
+                >
+                    <div
+                        class="w-1/2 h-1/2"
+                        v-for="(dataImage, imagesIndex) in data.images"
+                        :key="imagesIndex"
+                    >
                         <img
                             :src="dataImage.image"
                             class="w-full h-full object-cover"
@@ -113,28 +131,29 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import Footer from '../../components/Footer.vue';
-import store from '../../store';
+import { ref, onMounted, onUnmounted } from "vue";
+import Footer from "../../components/Footer.vue";
+import store from "../../store";
 import { useToast } from "vue-toast-notification";
 
 const isMobile = ref(false);
 
 const checkResolution = () => {
-  isMobile.value = window.innerWidth <= 900; // Anggap lebar mobile adalah 768px atau kurang
-  console.log(`Window width: ${window.innerWidth}, isMobile: ${isMobile.value}`);
+    isMobile.value = window.innerWidth <= 900; // Anggap lebar mobile adalah 768px atau kurang
+    console.log(
+        `Window width: ${window.innerWidth}, isMobile: ${isMobile.value}`
+    );
 };
 
 onMounted(() => {
-  checkResolution();
-  fetchData();
-  window.addEventListener('resize', checkResolution);
+    checkResolution();
+    fetchData();
+    window.addEventListener("resize", checkResolution);
 });
 
 onUnmounted(() => {
-  window.removeEventListener('resize', checkResolution);
+    window.removeEventListener("resize", checkResolution);
 });
-
 
 const toast = useToast();
 const roomTypeData = ref([]);
@@ -145,9 +164,11 @@ const fetchData = async () => {
             {},
         ]);
 
-        roomTypeData.value = response.data;
-
-        console.log(JSON.stringify(roomTypeData.value,null,2));
+        if (response.code == 200) {
+            roomTypeData.value = response.data;
+        } else {
+            toast.error("Something Wrong");
+        }
     } catch (error) {
         toast.error("Something Wrong");
     }

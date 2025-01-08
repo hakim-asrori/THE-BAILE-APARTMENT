@@ -1,16 +1,37 @@
 <template>
-   <div class="h-full w-full overflow-y-auto">
+    <div class="h-full w-full overflow-y-auto">
         <div class="flex flex-wrap w-full h-full">
-            <div
+            <a
                 class="lg:w-1/2 md:w-1/2 w-full h-1/2 bg-primaryColor"
+                v-if="galleries.length > 0"
                 v-for="(image, index) in galleries"
                 :key="index"
+                :href="image.imagePath"
+                target="_blank"
             >
                 <img
                     :src="image.imagePath"
                     alt=""
                     class="w-full h-full object-cover"
                 />
+            </a>
+            <div class="w-full p-10" v-else>
+                <div role="alert" class="alert alert-warning w-full">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 shrink-0 stroke-current"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                    </svg>
+                    <span>Gallery is empty</span>
+                </div>
             </div>
         </div>
     </div>

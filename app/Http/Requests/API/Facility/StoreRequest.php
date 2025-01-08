@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
     {
         return [
             "title" => "required|max:100",
-            "description" => "required|max:255",
+            "description" => "required|max:500",
             "features" => "required|array",
             "features.*" => "required|max:50",
             "image" => "required|image|max:5120|mimes:png,jpg,jpeg,webp",

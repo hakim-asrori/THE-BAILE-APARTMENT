@@ -2,9 +2,17 @@
     <div class="h-full carousel carousel-vertical w-full bg-[#E7E6D4]">
         <div class="carousel-item h-full">
             <video class="h-full w-full object-cover" autoplay loop muted>
-                <source src="../../../videos/vid-1.mp4" type="video/mp4" media="(min-width: 768px)" />
+                <source
+                    src="../../../videos/vid-1.mp4"
+                    type="video/mp4"
+                    media="(min-width: 768px)"
+                />
                 Your browser does not support the video tag.
-                <source src="../../../videos/vid-mobile.mp4" type="video/mp4" media="(max-width: 767px)" />
+                <source
+                    src="../../../videos/vid-mobile.mp4"
+                    type="video/mp4"
+                    media="(max-width: 767px)"
+                />
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -15,12 +23,8 @@
             <p class="text-xl pl-5 pt-5 text-[#5F3F2F] font-sans">
                 “One Step Away From Everything”
             </p>
-            <div
-                class="text-sm pl-5 text-[#5F3F2F] flex font-sans h-full"
-            >
-                <div
-                    class="flex flex-col h-auto w-auto"
-                >
+            <div class="text-sm pl-5 text-[#5F3F2F] flex font-sans h-full">
+                <div class="flex flex-col h-auto w-auto">
                     The Baile is strategically located in Menteng, a premium and
                     strategic area at the heart of the city. Now you can reach
                     every desired destination in just a step away.
@@ -36,7 +40,8 @@
                     >
                         <a
                             class="w-56 h-12 bg-[#E28A39] p-3 rounded-t-3xl flex justify-between items-center cursor-pointer"
-                            href="https://maps.app.goo.gl/hY3fBpur9H4qDWjZ8" target="_blank"
+                            href="https://maps.app.goo.gl/hY3fBpur9H4qDWjZ8"
+                            target="_blank"
                         >
                             <p class="font-sans text-white pl-2">
                                 VIEW ON GOOGLE MAPS
@@ -101,12 +106,19 @@ import store from "../../store";
 import Footer from "../../components/Footer.vue";
 
 // const fetchData = async () => {
-//     await store.dispatch("postData", ["public/room/view", {}]).then().catch();
+//     try {
+//         let response = await store.dispatch("postData", [
+//             "public/contact/store",
+//             {},
+//         ]);
+
+//         console.log(response);
+//     } catch (error) {
+//         console.log(error);
+//     }
 // };
 
 onMounted(() => {
-    console.log("nganu", import.meta.env);
-    console.log("homeeepost");
     // fetchData();
 });
 
@@ -117,7 +129,6 @@ const backgroundSvg = {
 </svg>
 ')`,
 };
-
 </script>
 
 <style scoped>

@@ -15,40 +15,46 @@
             </div>
             <div class="w-full md:w-1/3 h-44 flex flex-col">
                 <div class="flex flex-grow h-full items-center">
-                    <p
+                    <router-link
+                        to="/"
                         class="font-sans text-primaryColor w-full justify-center flex"
                     >
                         HOME
-                    </p>
-                    <p
+                    </router-link>
+                    <router-link
+                        to="/facilities"
                         class="font-sans text-primaryColor w-full justify-center flex"
                     >
                         FACILITIES
-                    </p>
+                    </router-link>
                 </div>
                 <div class="flex flex-grow h-full items-center">
-                    <p
+                    <router-link
+                        to="/room-type"
                         class="font-sans text-primaryColor w-full justify-center flex"
                     >
                         ROOM TYPE
-                    </p>
-                    <p
+                    </router-link>
+                    <router-link
+                        to="/gallery"
                         class="font-sans text-primaryColor w-full justify-center flex"
                     >
                         GALLERY
-                    </p>
+                    </router-link>
                 </div>
                 <div class="flex flex-grow h-full items-center">
-                    <p
+                    <router-link
+                        to="/contact"
                         class="font-sans text-primaryColor w-full justify-center flex"
                     >
                         CONTACT
-                    </p>
-                    <p
+                    </router-link>
+                    <router-link
+                        to="/enquire"
                         class="font-sans text-primaryColor w-full justify-center flex"
                     >
                         ENQUIRE
-                    </p>
+                    </router-link>
                 </div>
             </div>
             <div class="w-full md:w-1/3 h-44 text-primaryColor mt-5 md:mt-0">
@@ -124,6 +130,7 @@ const handleSubmit = async () => {
             },
         ]);
         if (response.code === 201 || response.code === 200) {
+            email.value = "";
             $toast.success("Success To Subscribe!", {
                 position: "top-right",
             });

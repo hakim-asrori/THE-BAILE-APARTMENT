@@ -17,7 +17,7 @@ class PublicApiMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!password_verify(env('APP_KEY', 'THE BAILE APARTMENT'), $request->header('x-baile-token'))) {
+        if (!password_verify(env('VITE_TOKEN', 'THE BAILE APARTMENT'), $request->header('x-baile-token'))) {
             return MessageFixer::warning('Token Invalid.');
         }
 

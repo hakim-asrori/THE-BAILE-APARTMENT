@@ -85,7 +85,7 @@
                 </div>
                 <div class="m-2">
                     <div
-                        class="flex border border-primaryColor w-40 justify-center rounded-lg"
+                        class="flex border border-primaryColor w-40 justify-center rounded-lg cursor-pointer"
                         @click="handleSubmit()"
                     >
                         <div
@@ -150,21 +150,23 @@ const fetchRoomType = async () => {
             formData.value,
         ]);
 
-        const datas = response.data.map((data) => {
-            return {
-                id: data.id,
-                name: data.title,
-            };
-        });
+        if (response.code == 200) {
+            const datas = response.data.map((data) => {
+                return {
+                    id: data.id,
+                    name: data.title,
+                };
+            });
 
-        datas.unshift({
-            id: null,
-            name: "PICK A ROOM TYPE",
-        });
+            datas.unshift({
+                id: null,
+                name: "PICK A ROOM TYPE",
+            });
 
-        roomType.value = datas;
-
-        console.log(roomType.value);
+            roomType.value = datas;
+        } else {
+            toast.error("Something Wrong");
+        }
     } catch (error) {
         toast.error("Something Wrong");
     }

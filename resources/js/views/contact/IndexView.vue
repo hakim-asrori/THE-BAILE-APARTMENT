@@ -188,8 +188,6 @@ const handleSubmit = async () => {
     const time = formattedDate.split(" ")[1];
     formData.value.time = time;
 
-    console.log("Formatted Data:", formData.value);
-
     try {
         const response = await store.dispatch("postData", [
             "public/contact/store",

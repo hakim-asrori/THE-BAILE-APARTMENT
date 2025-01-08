@@ -90,12 +90,12 @@
             <div class="pr-5 pt-2 text-center md:text-left">
                 <p class="text-primaryColor">CONNECT WITH US</p>
                 <div class="flex gap-2 justify-center">
-                    <a href="https://instagram.com/dzikrifazahk">
+                    <a href="https://www.instagram.com/the_baile_apartment/">
                         <i class="icon-instagram"></i>
                     </a>
-                    <a href="https://facebook.com/dzikrifazahk">
+                    <!-- <a href="https://facebook.com/dzikrifazahk">
                         <i class="icon-facebook"></i>
-                    </a>
+                    </a> -->
                 </div>
             </div>
         </div>

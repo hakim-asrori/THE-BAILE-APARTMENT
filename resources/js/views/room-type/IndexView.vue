@@ -140,9 +140,6 @@ const isMobile = ref(false);
 
 const checkResolution = () => {
     isMobile.value = window.innerWidth <= 900; // Anggap lebar mobile adalah 768px atau kurang
-    console.log(
-        `Window width: ${window.innerWidth}, isMobile: ${isMobile.value}`
-    );
 };
 
 onMounted(() => {
